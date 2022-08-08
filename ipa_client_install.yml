@@ -1,0 +1,10 @@
+---
+- name: Install IPA/IdM client
+  hosts: ipaclients
+  become: true
+  vars_files:
+    - vars_ipa.yml
+    - vault_ipa.yml
+  roles:
+    - role: ipaclient
+      state: present

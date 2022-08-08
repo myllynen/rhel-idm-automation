@@ -1,0 +1,10 @@
+---
+- name: Install IPA/IdM server
+  hosts: ipaserver
+  become: true
+  vars_files:
+    - vars_ipa.yml
+    - vault_ipa.yml
+  roles:
+    - role: ipaserver
+      state: present

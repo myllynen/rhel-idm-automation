@@ -1,0 +1,10 @@
+---
+- name: Install IPA/IdM replica
+  hosts: ipareplicas
+  become: true
+  vars_files:
+    - vars_ipa.yml
+    - vault_ipa.yml
+  roles:
+    - role: ipareplica
+      state: present

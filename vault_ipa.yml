@@ -1,0 +1,17 @@
+# Common
+ipaadmin_principal: admin
+ipaadmin_password: foobar12
+ipadm_password: foobar12
+
+# Server
+ipaserver_dirsrv_pin: foobar12
+ipaserver_http_pin: foobar12
+ipaserver_pkinit_pin: foobar12
+
+# Replica
+ipareplica_dirsrv_pin: foobar12
+ipareplica_http_pin: foobar12
+ipareplica_pkinit_pin: foobar12
+
+# AD trust
+#ad_trust_secret: foobar
