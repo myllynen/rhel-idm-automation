@@ -1,0 +1,16 @@
+---
+- name: Setup IPA/IdM AD trust
+  hosts: ipaserver
+  become: true
+  vars_files:
+    - vault_ipa.yml
+  tasks:
+  - name: Establish AD trust
+    ipatrust:
+      realm: ad.example.com
+      #server: ad-server1.example.com
+      admin: Administrator
+      password: "{{ ad_trust_secter }}"
+      two_way: false
+      base_id: 1000000
+      state: present

@@ -17,6 +17,8 @@ Ansible playbooks and roles for RHEL IdM automation.
   * Example playbook to install IdM master server
 * [ipa_replica_install.yml](ipa_replica_install.yml)
   * Example playbook to install IdM replicas
+* [ipa_adtrust_setup.yml](ipa_adtrust_setup.yml)
+  * Example playbook to setup IdM AD trust
 * [ipa_client_install.yml](ipa_client_install.yml)
   * Example playbook to install IdM clients
 
