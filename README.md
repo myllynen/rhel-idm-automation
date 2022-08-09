@@ -3,32 +3,35 @@
 [![License: GPLv2](https://img.shields.io/badge/license-GPLv2-brightgreen.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![License: GPLv3](https://img.shields.io/badge/license-GPLv3-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-Ansible playbooks and roles for RHEL IdM automation.
+Ansible playbooks for RHEL IdM automation.
 
 ## Contents
 
 * [inventory](inventory)
-  * Example vars file to install IdM server/replicas/clients
-* [vars_ipa.yml](vars_ipa.yml)
-  * Example vars file to install IdM server/replicas/clients
+  * Example inventory
+* [vars_ad.yml](vars_ad.yml), [vars_ca.yml](vars_ca.yml),
+  [vars_dns.yml](vars_dns.yml), [vars_ipa.yml](vars_ipa.yml)
+  * Vars files for playbooks
 * [vault_ipa.yml](vault_ipa.yml)
-  * Unencrypted vault file
+  * Unencrypted example vault file
 * [ipa_server_install.yml](ipa_server_install.yml)
-  * Example playbook to install IdM master server
+  * Playbook to install IdM master server
 * [ipa_replica_install.yml](ipa_replica_install.yml)
-  * Example playbook to install IdM replicas
+  * Playbook to install IdM replicas
 * [ipa_adtrust_setup.yml](ipa_adtrust_setup.yml)
-  * Example playbook to setup IdM AD trust
+  * Playbook to setup IdM AD trust
 * [ipa_client_install.yml](ipa_client_install.yml)
-  * Example playbook to install IdM clients
+  * Playbook to install IdM clients
 * [ipa_server_backup_create.yml](ipa_server_backup_create.yml)
-  * Example playbook to create IdM server backup
+  * Playbook to create IdM server backup
 * [ipa_server_backup_restore.yml](ipa_server_backup_restore.yml)
-  * Example playbook to restore IdM server backup
+  * Playbook to restore IdM server backup
+* [ipa_update_servers.yml](ipa_update_servers.yml)
+  * Playbook to update IdM master/replica servers
 
 Depending on the environment and requirements, separate vars files,
-group vars, variables defined in the inventory, or some other approach
-might be warranted. These examples aim to provide a known-good start
+group vars, variables defined in an inventory, or some other approach
+might be warranted. These examples aim to provide a known-good starting
 point for common installation types.
 
 ## See Also
