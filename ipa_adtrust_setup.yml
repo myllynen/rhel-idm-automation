@@ -10,7 +10,7 @@
       realm: ad.example.com
       #server: ad-server1.example.com
       admin: Administrator
-      password: "{{ ad_trust_secter }}"
+      password: "{{ ad_trust_secret }}"
       two_way: false
       base_id: 1000000
       state: present
