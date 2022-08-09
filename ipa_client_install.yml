@@ -3,6 +3,7 @@
   hosts: ipaclients
   become: true
   vars_files:
+    - vars_dns.yml
     - vars_ipa.yml
     - vault_ipa.yml
   roles:

@@ -3,6 +3,9 @@
   hosts: ipaserver
   become: true
   vars_files:
+    - vars_ad.yml
+    - vars_ca.yml
+    - vars_dns.yml
     - vars_ipa.yml
     - vault_ipa.yml
   roles:

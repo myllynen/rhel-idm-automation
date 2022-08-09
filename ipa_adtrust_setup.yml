@@ -3,14 +3,17 @@
   hosts: ipaserver
   become: true
   vars_files:
+    - vars_ad.yml
     - vault_ipa.yml
   tasks:
   - name: Establish AD trust
     ipatrust:
-      realm: ad.example.com
-      #server: ad-server1.example.com
-      admin: Administrator
-      password: "{{ ad_trust_secret }}"
-      two_way: false
-      base_id: 1000000
+      realm: "{{ ipatrust_ad_realm }}"
+      base_id: "{{ ipatrust_ad_base_id }}"
+      # admin/password for one-way trust
+      admin: "{{ ipatrust_ad_admin }}"
+      password: "{{ ipatrust_ad_admin_password }}"
+      # admin/password and trust_secret are mutually exclusive
+      #trust_secret: "{{ ipatrust_trust_secret }}"
+      #two_way: true
       state: present

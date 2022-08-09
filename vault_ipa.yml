@@ -3,15 +3,16 @@ ipaadmin_principal: admin
 ipaadmin_password: foobar12
 ipadm_password: foobar12
 
-# Server
+# External CA - server
 ipaserver_dirsrv_pin: foobar12
 ipaserver_http_pin: foobar12
 ipaserver_pkinit_pin: foobar12
 
-# Replica
+# External CA - replicas
 ipareplica_dirsrv_pin: foobar12
 ipareplica_http_pin: foobar12
 ipareplica_pkinit_pin: foobar12
 
-# AD trust
-#ad_trust_secret: foobar
+# AD trust - define either or
+#ad_admin_password: foobar12
+#ad_trust_secret: foobar1234

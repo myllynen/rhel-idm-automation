@@ -8,7 +8,7 @@
     ipabackup_from_controller: true
     ipabackup_controller_path: /var/backup
     ipabackup_name: "{{ ipaserver_backup_name }}"
-    ipabackup_password: "{{ ipaserver_dirsrv_pin }}"
+    ipabackup_password: "{{ ipadm_password }}"
 
     #ipabackup_setup_firewalld: true
     #ipabackup_firewalld_zone: public

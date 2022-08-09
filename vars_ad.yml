@@ -1,0 +1,11 @@
+#
+# IPA/IdM AD trust configuration
+#
+ipaserver_setup_adtrust: false
+ipareplica_setup_adtrust: false
+
+ipatrust_ad_realm: AD.EXAMPLE.COM
+ipatrust_ad_base_id: 1000000
+ipatrust_ad_admin: Administrator
+ipatrust_ad_admin_password: "{{ ad_admin_password }}"
+ipatrust_ad_trust_secret: "{{ ad_trust_secret }}"
