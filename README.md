@@ -21,6 +21,10 @@ Ansible playbooks and roles for RHEL IdM automation.
   * Example playbook to setup IdM AD trust
 * [ipa_client_install.yml](ipa_client_install.yml)
   * Example playbook to install IdM clients
+* [ipa_server_backup_create.yml](ipa_server_backup_create.yml)
+  * Example playbook to create IdM server backup
+* [ipa_server_backup_restore.yml](ipa_server_backup_restore.yml)
+  * Example playbook to restore IdM server backup
 
 Depending on the environment and requirements, separate vars files,
 group vars, variables defined in the inventory, or some other approach

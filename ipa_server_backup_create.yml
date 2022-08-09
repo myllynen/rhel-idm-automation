@@ -1,0 +1,15 @@
+---
+- name: Create IPA/IdM server backup
+  hosts: ipaserver
+  become: true
+  vars_files:
+    - vault_ipa.yml
+  vars:
+    ipabackup_logs: false
+    ipabackup_online: false
+    ipabackup_to_controller: true
+    ipabackup_keep_on_server: false
+    ipabackup_controller_path: /var/backup
+  roles:
+  - role: ipabackup
+    state: present
