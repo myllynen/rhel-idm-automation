@@ -4,27 +4,28 @@
 ipaserver_setup_dns: false
 ipareplica_setup_dns: false
 
-# Ensure at least primary master is allowed to do nsupdates
-
-ipaserver_auto_reverse: true
-ipaserver_no_forwarders: false
-ipaserver_auto_forwarders: true
-ipaserver_forward_policy: first
-ipaserver_forwarders:
-  - 1.1.1.1
-  - 8.8.8.8
-ipaserver_no_dnssec_validation: true
-    
-ipareplica_auto_reverse: true
-ipareplica_no_forwarders: false
-ipareplica_auto_forwarders: true
-ipareplica_forward_policy: first
-ipaserver_forwarders:
-  - 1.1.1.1
-  - 8.8.8.8
-ipareplica_no_dnssec_validation: true
-
 ipaclient_no_dns_lookup: true
 ipaclient_ssh_trust_dns: true
 ipaclient_all_ip_addresses: false
 ipasssd_enable_dns_updates: false
+
+# Uncomment the below variable when setting up DNS server
+# Ensure at least primary master is allowed to do nsupdates
+
+#ipaserver_auto_reverse: true
+#ipaserver_no_forwarders: false
+#ipaserver_auto_forwarders: true
+#ipaserver_forward_policy: first
+#ipaserver_forwarders:
+#  - 1.1.1.1
+#  - 8.8.8.8
+#ipaserver_no_dnssec_validation: true
+    
+#ipareplica_auto_reverse: true
+#ipareplica_no_forwarders: false
+#ipareplica_auto_forwarders: true
+#ipareplica_forward_policy: first
+#ipareplica_forwarders:
+#  - 1.1.1.1
+#  - 8.8.8.8
+#ipareplica_no_dnssec_validation: true
