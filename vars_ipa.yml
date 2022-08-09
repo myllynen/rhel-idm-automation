@@ -29,6 +29,10 @@ ipareplica_realm: SUB.EXAMPLE.COM
 ipareplica_setup_firewalld: true
 ipareplica_firewalld_zone: public
 
+# Manual override of servers, needed when DNS not set up
+ipareplica_servers:
+  - idm1.sub.example.com
+
 # Testing
 #ipareplica_no_host_dns: true
 #ipareplica_mem_check: false

@@ -20,7 +20,7 @@ ipasssd_enable_dns_updates: false
 #  - 1.1.1.1
 #  - 8.8.8.8
 #ipaserver_no_dnssec_validation: true
-    
+
 #ipareplica_auto_reverse: true
 #ipareplica_no_forwarders: false
 #ipareplica_auto_forwarders: true
