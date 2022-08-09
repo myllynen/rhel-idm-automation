@@ -7,7 +7,7 @@
   vars:
     ipabackup_from_controller: true
     ipabackup_controller_path: /var/backup
-    ipabackup_name: idm1.sub.example.com_ipa-full-2022-08-09-12-11-40
+    ipabackup_name: "{{ ipaserver_backup_name }}"
     ipabackup_password: "{{ ipaserver_dirsrv_pin }}"
 
     #ipabackup_setup_firewalld: true
