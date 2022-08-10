@@ -10,8 +10,8 @@
     ipabackup_name: "{{ ipaserver_backup_name }}"
     ipabackup_password: "{{ ipadm_password }}"
 
-    #ipabackup_setup_firewalld: true
-    #ipabackup_firewalld_zone: public
+    ipabackup_setup_firewalld: "{{ ipacluster_setup_firewalld }}"
+    ipabackup_firewalld_zone: "{{ ipacluster_firewalld_zone }}"
   roles:
   - role: ipabackup
     state: restored

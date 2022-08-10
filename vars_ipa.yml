@@ -1,15 +1,21 @@
 # Master and replicas must use correct FQDN and resolv.conf
-# AD trust requires realm to be upper-case primary DNS name
 
+#
+# Common configuration
+#
+ipacluster_domain: sub.example.com
+ipacluster_realm: "{{ ipacluster_domain | upper }}"
+ipacluster_setup_firewalld: true
+ipacluster_firewalld_zone: public
 
 #
 # Master configuration
 #
-ipaserver_domain: sub.example.com
-ipaserver_realm: SUB.EXAMPLE.COM
+ipaserver_domain: "{{ ipacluster_domain }}"
+ipaserver_realm: "{{ ipacluster_realm }}"
 
-ipaserver_setup_firewalld: true
-ipaserver_firewalld_zone: public
+ipaserver_setup_firewalld: "{{ ipacluster_setup_firewalld }}"
+ipaserver_firewalld_zone: "{{ ipacluster_firewalld_zone }}"
 
 # UID/GID range
 ipaserver_idstart: 1000
@@ -19,15 +25,14 @@ ipaserver_idmax: 999999
 #ipaserver_no_host_dns: true
 #ipaserver_mem_check: false
 
-
 #
 # Replica configuration
 #
-ipareplica_domain: sub.example.com
-ipareplica_realm: SUB.EXAMPLE.COM
+ipareplica_domain: "{{ ipacluster_domain }}"
+ipareplica_realm: "{{ ipacluster_realm }}"
 
-ipareplica_setup_firewalld: true
-ipareplica_firewalld_zone: public
+ipareplica_setup_firewalld: "{{ ipacluster_setup_firewalld }}"
+ipareplica_firewalld_zone: "{{ ipacluster_firewalld_zone }}"
 
 # Manual override of servers, needed when not setting up DNS
 ipareplica_servers:
@@ -37,12 +42,11 @@ ipareplica_servers:
 #ipareplica_no_host_dns: true
 #ipareplica_mem_check: false
 
-
 #
 # Client configuration
 #
-ipaclient_domain: sub.example.com
-ipaclient_realm: SUB.EXAMPLE.COM
+ipaclient_domain: "{{ ipacluster_domain }}"
+ipaclient_realm: "{{ ipacluster_realm }}"
 
 # Manual override of servers, needed when not setting up DNS
 ipaclient_servers:
