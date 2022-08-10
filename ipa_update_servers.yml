@@ -4,6 +4,7 @@
   become: true
   serial: 1
   vars:
+    always_reboot: false
     # Documented RHEL IdM recommendation is "at least 10 minutes"
     pause_between_servers_mins: 10
   tasks:
@@ -17,6 +18,7 @@
         name: '*'
         state: latest
         update_cache: true
+      register: package_install
 
     - name: Check need for rebooting
       command: needs-restarting -r
@@ -26,8 +28,10 @@
                     
     - name: Reboot system
       reboot:
-      when: needs_restarting.rc != 0
+      when: always_reboot | bool or
+            needs_restarting.rc != 0
 
     - name: Pause before updating next server
       pause:
         minutes: "{{ pause_between_servers_mins }}"
+      when: package_install is changed
