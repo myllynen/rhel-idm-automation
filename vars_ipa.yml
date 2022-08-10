@@ -44,12 +44,13 @@ ipareplica_servers:
 ipaclient_domain: sub.example.com
 ipaclient_realm: SUB.EXAMPLE.COM
 
+# Manual override of servers, needed when not setting up DNS
 ipaclient_servers:
   - idm1.sub.example.com
   - idm2.sub.example.com
 
-ipaclient_mkhomedir: true
 ipaclient_no_ntp: true
+ipaclient_mkhomedir: true
 ipaclient_no_nisdomain: true
 
 ipasssd_permit: false
