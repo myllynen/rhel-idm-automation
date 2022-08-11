@@ -7,3 +7,7 @@ idm3.sub.example.com ipareplica_hidden_replica=true
 
 [ipaclients]
 idmc.sub.example.com
+
+# Server to use for backups, preferably a hidden replica
+[ipabackup]
+idm3.sub.example.com
