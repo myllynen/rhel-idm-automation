@@ -38,12 +38,12 @@ point for common installation types.
 
 ## Quick Usage Example
 
-To install IPA/IdM server, replicas, and connect clients:
+To install IPA/IdM master server, replicas, and connect clients:
 
 ```
-# Edit hosts and settings to suite local environment
+# Edit inventory and settings to suite local environment
 vi inventory vars_ipa.yml
-# By default no AD trust, internal CA, no DNS setup
+# By default no AD trust, use internal CA, no DNS setup
 less vars_ad.yml vars_ca.yml vars_dns.yml
 # Install IPA/IdM master server
 ansible-playbook -i inventory ipa_server_install.yml
