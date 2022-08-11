@@ -36,6 +36,26 @@ group vars, variables defined in an inventory, or some other approach
 might be warranted. These examples aim to provide a known-good starting
 point for common installation types.
 
+## Quick Usage Example
+
+To install IPA/IdM server, replicas, and connect clients:
+
+```
+# Edit hosts and settings to suite local environment
+vi inventory vars_ipa.yml
+# By default no AD trust, internal CA, no DNS setup
+less vars_ad.yml vars_ca.yml vars_dns.yml
+# Install IPA/IdM master server
+ansible-playbook -i inventory ipa_server_install.yml
+# Install IPA/IdM replicas
+ansible-playbook -i inventory ipa_replica_install.yml
+# Backup and update IPA/IdM server and replicas
+ansible-playbook -i inventory ipa_server_backup_create.yml
+ansible-playbook -i inventory ipa_update_servers.yml
+# Connect clients to IPA/IdM
+ansible-playbook -i inventory ipa_client_install.yml
+```
+
 ## See Also
 
 See also
