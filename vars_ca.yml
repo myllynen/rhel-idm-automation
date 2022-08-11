@@ -9,39 +9,58 @@ ipareplica_setup_ca: true
 ipareplica_setup_kra: true
 ipareplica_no_pkinit: false
 
-# Define either internal or external CA variables
+# Define only one set of variables below
 # Certificates with IP in SAN require use of integrated DNS
 
+#
 # Internal CA
+#
 ipaserver_external_ca: false
 #ipaserver_subject_base:
 #ipaserver_ca_subject:
 ipaserver_ca_signing_algorithm: SHA512withRSA
 
-# External CA
+#
+# External CA + IPA CA installation step 1 variables
+#
 #ipaserver_external_ca: true
 #ipaserver_external_ca_type: generic
 #ipaserver_copy_csr_to_controller: true
 
+#
+# External CA + IPA CA installation step 2 variables
+#
+#ipaserver_external_cert_files_from_controller:
+#  - /root/ca-chain.pem
+##ipaserver_subject_base:
+##ipaserver_ca_subject:
+#ipaserver_ca_signing_algorithm: SHA512withRSA
+
+#
+# Disabled IPA CA + external CA provided certs variables
+#
 #ipaserver_dirsrv_cert_files:
-#  - /root/certs/ds.cert.pem
-#  - /root/certs/ds.key.pem
-#ipaserver_dirsrv_cert_name:
+#  - /root/certs/server-ds-chain.pem
+#  - /root/certs/server-ds-priv.key
+##ipaserver_dirsrv_cert_name:
 #ipaserver_http_cert_files:
-#  - /root/certs/http.cert.pem
-#  - /root/certs/http.key.pem
-#ipaserver_http_cert_name:
+#  - /root/certs/server-http-chain.pem
+#  - /root/certs/server-http-priv.key
+##ipaserver_http_cert_name:
 #ipaserver_pkinit_cert_files:
-#  - /root/certs/pkinit.cert.pem
-#  - /root/certs/pkinit.key.pem
-#ipaserver_pkinit_cert_name:
+#  - /root/certs/server-pkinit-chain.pem
+#  - /root/certs/server-pkinit-priv.key
+##ipaserver_pkinit_cert_name:
 
 #ipareplica_dirsrv_cert_files:
-#  - /root/certs/ds.crt
-#ipareplica_dirsrv_cert_name:
+#  - /root/certs/replicaN-ds-chain.pem
+#  - /root/certs/replicaN-ds-priv.key
+##ipareplica_dirsrv_cert_name:
 #ipareplica_http_cert_files:
-#  - /root/certs/http.crt
-#ipareplica_http_cert_name:
+#  - /root/certs/replicaN-http-chain.pem
+#  - /root/certs/replicaN-http-priv.key
+##ipareplica_http_cert_name:
 #ipareplica_pkinit_cert_files:
-#  - /root/certs/pk.crt
-#ipareplica_pkinit_cert_name:
+#  - /root/certs/replicaN-pkinit-chain.pem
+#  - /root/certs/replicaN-pkinit-priv.key
+##ipareplica_pkinit_cert_name:
