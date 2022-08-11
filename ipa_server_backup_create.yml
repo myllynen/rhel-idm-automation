@@ -9,7 +9,7 @@
     ipabackup_online: false
     ipabackup_to_controller: true
     ipabackup_keep_on_server: false
-    ipabackup_controller_path: /var/backup
+    #ipabackup_controller_path: /var/backup
   roles:
   - role: ipabackup
     state: present
