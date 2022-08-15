@@ -2,12 +2,12 @@
 idm1.sub.example.com
 
 [ipareplicas]
-idm2.sub.example.com ipareplica_hidden_replica=false
-idm3.sub.example.com ipareplica_hidden_replica=true
+idm2.sub.example.com
+idm3.sub.example.com
 
 [ipaclients]
 idmc.sub.example.com
 
-# Server to use for backups, preferably a hidden replica
+# Server to use for backups, preferably hidden
 [ipabackup]
 idm3.sub.example.com

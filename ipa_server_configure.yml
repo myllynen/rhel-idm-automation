@@ -1,0 +1,40 @@
+---
+- name: Configure IPA/IdM
+  hosts: ipaserver
+  become: true
+  vars_files:
+    - vault_ipa.yml
+  vars:
+    ipa_ca_renewal_server: idm1.sub.example.com
+    ipa_servers_visible:
+      - idm1.sub.example.com
+      - idm2.sub.example.com
+    ipa_servers_hidden:
+      - idm3.sub.example.com
+  tasks:
+    - name: Verify configuration
+      assert:
+        that:
+          - ipa_ca_renewal_server not in ipa_servers_hidden | select() | list
+        fail_msg: "CA renewal server cannot be hidden"
+        success_msg: "Configuration verified"
+
+    - name: Configure servers visible
+      ipaserver:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        hidden: false
+      loop: "{{ ipa_servers_visible }}"
+
+    - name: Configure CA renewal server
+      ipaconfig:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        ca_renewal_master_server: "{{ ipa_ca_renewal_server }}"
+      when: ipa_ca_renewal_server | default(false)
+
+    - name: Configure servers hidden
+      ipaserver:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        hidden: true
+      loop: "{{ ipa_servers_hidden | select() | list }}"
