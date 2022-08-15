@@ -19,6 +19,8 @@ Ansible playbooks for RHEL IdM automation.
   * Playbook to install IdM master server
 * [ipa_replica_install.yml](ipa_replica_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipareplica)
   * Playbook to install IdM replicas
+* [ipa_server_configure.yml](ipa_server_configure.yml) | [doc](https://github.com/freeipa/ansible-freeipa)
+  * Playbook to install IdM replicas
 * [ipa_adtrust_setup.yml](ipa_adtrust_setup.yml) | [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-trust.md)
   * Playbook to setup IdM AD trust
 * [ipa_client_install.yml](ipa_client_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaclient)
@@ -48,6 +50,8 @@ less vars_ad.yml vars_ca.yml vars_dns.yml
 ansible-playbook -i inventory ipa_server_install.yml
 # Install IPA/IdM replicas
 ansible-playbook -i inventory ipa_replica_install.yml
+# Configure IPA/IdM server and replicas
+ansible-playbook -i inventory ipa_server_configure.yml
 # Backup and update IPA/IdM server and replicas
 ansible-playbook -i inventory ipa_server_backup_create.yml
 ansible-playbook -i inventory ipa_update_servers.yml
