@@ -1,0 +1,89 @@
+---
+# List of users to delete
+ipa_users_delete:
+  - olduser
+
+# List of groups to delete
+ipa_groups_delete:
+  - oldgroup
+
+# List of groups to create
+# Mandatory parameters: name
+ipa_groups_create:
+  - name: admingroup
+    gid: 55555
+  - name: testgroup
+    gid: 12345
+
+# List of users to create
+# Mandatory parameters: name, first, last
+ipa_users_create:
+  - name: testuser
+#    # This should come from vault
+    password: foobar12
+    first: Givenname
+    last: Surname
+#    email:
+#      - testuser@example.com
+    uid: 12345
+#    gid: 12345
+#    noprivate: false
+#    homedir: /home/testuser
+#    shell: /bin/bash
+#    principalexpiration: "2099-12-31 23:59"
+#    passwordexpiration: "2099-12-31 23:59"
+
+# List of groups with users
+# Mandatory parameters: name, groups
+ipa_groups_users:
+  - name: admingroup
+    members:
+      - testuser
+  - name: testgroup
+    members:
+      - testuser
+
+# List of sudo commands to delete
+ipa_sudo_commands_delete:
+#  - /usr/sbin/poweroff
+
+# List of sudo commands to create
+ipa_sudo_commands_create:
+  - /usr/bin/su
+
+# List of group sudo rules to delete
+ipa_group_sudorules_delete:
+#  - Test sudo rule
+
+# List of group sudo rules to create
+ipa_group_sudorules_create:
+  - name: Admin sudo rule
+    description: Test rule
+    #users:
+    #  - adminuser
+    groups:
+      - admingroup
+    # Available on all hosts by default,
+    # define hostsgroups to limit access
+    #hostgroups:
+    #  - somegroup
+    # All commands are allowed by default,
+    # define sudocommands to limit access
+    sudocommands:
+      - /usr/bin/su
+    sudooptions:
+      - '!authenticate'
+
+# List of self service rules to delete
+ipa_selfservice_delete:
+  - User Self service
+
+# List of self service rules to create
+ipa_selfservice_create:
+  - name: Self can change initials and login shell
+    permissions:
+      - read
+      - write
+    attributes:
+      - initials
+      - loginshell
