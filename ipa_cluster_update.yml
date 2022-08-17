@@ -1,5 +1,5 @@
 ---
-- name: Update IPA/IdM servers
+- name: Update IPA/IdM cluster
   hosts: ipaserver,ipareplicas
   become: true
   serial: 1
