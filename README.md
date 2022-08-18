@@ -11,7 +11,8 @@ Ansible playbooks for RHEL IdM automation.
 * [vars_ad.yml](vars_ad.yml) | [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-trust.md),
   [vars_ca.yml](vars_ca.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#certificate-system-variables),
   [vars_dns.yml](vars_dns.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#dns-variables),
-  [vars_ipa.yml](vars_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#base-variables)
+  [vars_ipa.yml](vars_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#base-variables),
+  [vars_data.yml](vars_data.yml) | [doc](https://github.com/freeipa/ansible-freeipa/)
   * Vars files for playbooks
 * [vault_ipa.yml](vault_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa#ansible-inventory-file)
   * Unencrypted example vault file
