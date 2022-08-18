@@ -6,14 +6,21 @@
     - vars_ad.yml
     - vault_ipa.yml
   tasks:
-  - name: Establish AD trust
+  - name: Establish one-way AD trust
     ipatrust:
       realm: "{{ ipatrust_ad_realm }}"
       base_id: "{{ ipatrust_ad_base_id }}"
-      # admin/password for one-way trust
       admin: "{{ ipatrust_ad_admin }}"
       password: "{{ ipatrust_ad_admin_password }}"
-      # admin/password and trust_secret are mutually exclusive
-      #trust_secret: "{{ ipatrust_trust_secret }}"
-      #two_way: true
+      two_way: false
       state: present
+    when: not ipatrust_ad_two_way_trust | bool
+
+  - name: Establish two-way AD trust
+    ipatrust:
+      realm: "{{ ipatrust_ad_realm }}"
+      base_id: "{{ ipatrust_ad_base_id }}"
+      trust_secret: "{{ ipatrust_trust_secret }}"
+      two_way: true
+      state: present
+    when: ipatrust_ad_two_way_trust | bool

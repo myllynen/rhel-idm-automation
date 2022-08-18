@@ -25,7 +25,7 @@ Ansible playbooks for RHEL IdM automation.
 * [ipa_adtrust_setup.yml](ipa_adtrust_setup.yml) | [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-trust.md)
   * Playbook to setup IdM AD trust
 * [ipa_data_setup.yml](ipa_data_setup.yml) | [doc](https://github.com/freeipa/ansible-freeipa)
-  * Playbook to setup IdM identity and policy data
+  * Playbook to setup and populate IdM identity and policy data
 * [ipa_client_install.yml](ipa_client_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaclient)
   * Playbook to install IdM clients
 * [ipa_backup_create.yml](ipa_backup_create.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipabackup)
