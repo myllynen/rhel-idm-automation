@@ -10,7 +10,7 @@ ipaclient_all_ip_addresses: false
 ipasssd_enable_dns_updates: false
 
 # Uncomment the below variable when setting up DNS server
-# Ensure at least primary master is allowed to do nsupdates
+# Ensure at least one IPA DNS server is allowed to do nsupdates
 
 #ipaserver_auto_reverse: true
 #ipaserver_no_forwarders: false

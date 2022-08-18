@@ -17,7 +17,7 @@ Ansible playbooks for RHEL IdM automation.
 * [vault_ipa.yml](vault_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa#ansible-inventory-file)
   * Unencrypted example vault file
 * [ipa_server_install.yml](ipa_server_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver)
-  * Playbook to install IdM master server
+  * Playbook to install IdM first server
 * [ipa_replica_install.yml](ipa_replica_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipareplica)
   * Playbook to install IdM replica servers
 * [ipa_cluster_configure.yml](ipa_cluster_configure.yml) | [doc](https://github.com/freeipa/ansible-freeipa)
@@ -42,20 +42,19 @@ point for common installation types.
 
 ## Quick Usage Example
 
-To install IPA/IdM master and replica servers, configure IPA/IdM
-cluster, populate IPA/IdM with identity and policy data, and connect
-clients:
+To install IPA/IdM servers, configure IPA/IdM cluster, populate IPA/IdM
+with identity and policy data, and connect clients:
 
 ```
 # Edit inventory and settings to suite local environment
 vi inventory vars_ipa.yml vars_data.yml
 # By default no AD trust, use internal CA, no DNS setup
 less vars_ad.yml vars_ca.yml vars_dns.yml
-# Install IPA/IdM master server
+# Install IPA/IdM first server
 ansible-playbook -i inventory ipa_server_install.yml
-# Install IPA/IdM replicas
+# Install IPA/IdM replica servers
 ansible-playbook -i inventory ipa_replica_install.yml
-# Configure IPA/IdM cluster master and replica servers
+# Configure IPA/IdM cluster servers
 ansible-playbook -i inventory ipa_cluster_configure.yml
 # Setup and populate IPA/IdM identity and policy data
 ansible-playbook -i inventory ipa_data_setup.yml

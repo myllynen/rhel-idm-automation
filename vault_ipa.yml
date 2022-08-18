@@ -3,12 +3,12 @@ ipaadmin_principal: admin
 ipaadmin_password: foobar12
 ipadm_password: foobar12
 
-# Disabled IPA CA + external CA provided certs secrets - server
+# Disabled IPA CA + external CA provided certs secrets - first server
 #ipaserver_dirsrv_pin: foobar12
 #ipaserver_http_pin: foobar12
 #ipaserver_pkinit_pin: foobar12
 
-# Disabled IPA CA + external CA provided certs secrets - replicas
+# Disabled IPA CA + external CA provided certs secrets - replica servers
 #ipareplica_dirsrv_pin: foobar12
 #ipareplica_http_pin: foobar12
 #ipareplica_pkinit_pin: foobar12
