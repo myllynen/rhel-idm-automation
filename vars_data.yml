@@ -64,7 +64,9 @@ ipa_group_sudorules_create:
     groups:
       - admingroup
     # Available on all hosts by default,
-    # define hostsgroups to limit access
+    # define hosts/groups to limit access
+    #hosts:
+    #  - somehost
     #hostgroups:
     #  - somegroup
     # All commands are allowed by default,
