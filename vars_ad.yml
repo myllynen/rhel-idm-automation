@@ -13,10 +13,12 @@ ipatrust_ad_base_id: 1000000
 # IPA/IdM AD trust type
 ipatrust_ad_two_way_trust: false
 
+# Either define admin/password or trust secret
+# Password and trust secret should come from vault
+
 # admin/password for one-way trust
-ipatrust_ad_admin: Administrator
+ipatrust_ad_admin_username: Administrator
 ipatrust_ad_admin_password: "{{ ad_admin_password }}"
 
 # ipatrust_ad_trust_secret for two-way trust
-# admin/password and trust_secret are mutually exclusive
 #ipatrust_ad_trust_secret: "{{ ad_trust_secret }}"

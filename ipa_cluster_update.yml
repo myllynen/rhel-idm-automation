@@ -6,7 +6,7 @@
   vars:
     always_reboot: false
     # Documented RHEL IdM recommendation is "at least 10 minutes"
-    pause_between_servers_mins: 10
+    pause_between_servers_minutes: 10
   tasks:
     - name: Install yum-utils package
       yum:
@@ -33,5 +33,5 @@
 
     - name: Pause before updating next server
       pause:
-        minutes: "{{ pause_between_servers_mins }}"
+        minutes: "{{ pause_between_servers_minutes }}"
       when: package_install is changed

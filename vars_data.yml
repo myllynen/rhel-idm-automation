@@ -21,8 +21,8 @@ ipa_users_create:
   - name: testuser
 #    # This should come from vault
     password: foobar12
-    first: Givenname
-    last: Surname
+    first: Test
+    last: User
 #    email:
 #      - testuser@example.com
     uid: 12345

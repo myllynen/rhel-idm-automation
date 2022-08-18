@@ -10,7 +10,7 @@
     ipatrust:
       realm: "{{ ipatrust_ad_realm }}"
       base_id: "{{ ipatrust_ad_base_id }}"
-      admin: "{{ ipatrust_ad_admin }}"
+      admin: "{{ ipatrust_ad_admin_username }}"
       password: "{{ ipatrust_ad_admin_password }}"
       two_way: false
       state: present
