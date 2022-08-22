@@ -5,6 +5,8 @@
   vars_files:
     - vault_ipa.yml
   vars:
+    # TODO: Configure CRL publishing server
+    # https://github.com/freeipa/ansible-freeipa/issues/883
     ipa_ca_renewal_server: idm1.sub.example.com
     ipa_servers_visible:
       - idm1.sub.example.com
