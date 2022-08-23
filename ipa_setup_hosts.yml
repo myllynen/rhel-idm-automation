@@ -56,8 +56,8 @@
       ipahostgroup:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
-        host: "{{ item.members.hosts | default(omit) }}"
-        hostgroup: "{{ item.members.hostgroups | default(omit) }}"
+        host: "{{ item.hosts | default(omit) }}"
+        hostgroup: "{{ item.hostgroups | default(omit) }}"
         action: member
       loop: "{{ ipa_hostgroup_members_add | default([]) | select() | list }}"
       loop_control:
