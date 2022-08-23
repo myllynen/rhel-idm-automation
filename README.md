@@ -11,9 +11,8 @@ Ansible playbooks for RHEL IdM automation.
 * [vars_ad.yml](vars_ad.yml) | [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-trust.md),
   [vars_ca.yml](vars_ca.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#certificate-system-variables),
   [vars_dns.yml](vars_dns.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#dns-variables),
-  [vars_ipa.yml](vars_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#base-variables),
-  [vars_data.yml](vars_data.yml) | [doc](https://github.com/freeipa/ansible-freeipa)
-  * Vars files for playbooks
+  [vars_ipa.yml](vars_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver#base-variables)
+  * Vars files for installing IdM servers
 * [vault_ipa.yml](vault_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa#ansible-inventory-file)
   * Unencrypted example vault file
 * [ipa_server_install.yml](ipa_server_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver)
@@ -24,8 +23,15 @@ Ansible playbooks for RHEL IdM automation.
   * Playbook to configure IdM cluster servers
 * [ipa_adtrust_setup.yml](ipa_adtrust_setup.yml) | [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-trust.md)
   * Playbook to setup IdM AD trust
-* [ipa_data_setup.yml](ipa_data_setup.yml) | [doc](https://github.com/freeipa/ansible-freeipa)
-  * Playbook to setup and populate IdM identity and policy data
+* [ipa_setup_users.yml](ipa_setup_users.yml) |
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-user.md),
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-group.md)
+  * Playbook to setup users and groups
+* [ipa_setup_sudo.yml](ipa_setup_sudo.yml) |
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-sudocmd.md),
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-sudocmdgroup.md),
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-sudorule.md)
+  * Playbook to setup sudo commands and rules
 * [ipa_client_install.yml](ipa_client_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaclient)
   * Playbook to install IdM clients
 * [ipa_backup_create.yml](ipa_backup_create.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipabackup)
