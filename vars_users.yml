@@ -1,3 +1,11 @@
+# List of groups to delete
+ipa_groups_delete:
+  - oldgroup
+
+# List of users to delete
+ipa_users_delete:
+  - olduser
+
 # List of group members to remove
 # Mandatory parameters: name
 ipa_group_members_remove:
@@ -6,14 +14,6 @@ ipa_group_members_remove:
       - oldadmin
     groups:
       - admgroup
-
-# List of users to delete
-ipa_users_delete:
-  - olduser
-
-# List of groups to delete
-ipa_groups_delete:
-  - oldgroup
 
 
 # List of groups to create
@@ -41,7 +41,6 @@ ipa_users_create:
 #    shell: /bin/bash
 #    principalexpiration: "2099-12-31 23:59"
 #    passwordexpiration: "2099-12-31 23:59"
-
 
 # List of group members to add
 # Mandatory parameters: name
