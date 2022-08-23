@@ -5,7 +5,7 @@
   vars_files:
     - vault_ipa.yml
   vars:
-    # TODO: Configure CRL publishing server
+    # TODO: Configure CRL publisher server
     # https://github.com/freeipa/ansible-freeipa/issues/883
     ipa_ca_renewal_server: idm1.sub.example.com
     ipa_servers_visible:
@@ -13,6 +13,12 @@
       - idm2.sub.example.com
     ipa_servers_hidden:
       - idm3.sub.example.com
+    ipa_topology_segments_add:
+      - { suffix: domain+ca, left: idm1.sub.example.com, right: idm2.sub.example.com }
+      - { suffix: domain+ca, left: idm1.sub.example.com, right: idm3.sub.example.com }
+      - { suffix: domain+ca, left: idm2.sub.example.com, right: idm3.sub.example.com }
+    ipa_topology_segments_remove:
+      - { suffix: domain+ca, left: idm1.sub.example.com, right: lost.sub.example.com }
   tasks:
     - name: Verify configuration
       assert:
@@ -40,3 +46,33 @@
         name: "{{ item }}"
         hidden: true
       loop: "{{ ipa_servers_hidden | select() | list }}"
+
+    - name: Add topology segment
+      ipatopologysegment:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        suffix: "{{ item.suffix }}"
+        name: "{{ item.name | default(omit) }}"
+        left: "{{ item.left }}"
+        right: "{{ item.right }}"
+        state: present
+      loop: "{{ ipa_topology_segments_add | default([], true) | select() | list }}"
+
+    - name: Remove topology segment
+      ipatopologysegment:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        suffix: "{{ item.suffix }}"
+        name: "{{ item.name | default(omit) }}"
+        left: "{{ item.left }}"
+        right: "{{ item.right }}"
+        state: absent
+      loop: "{{ ipa_topology_segments_remove | default([], true) | select() | list }}"
+
+    - name: Verify topology suffix
+      ipatopologysuffix:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        suffix: domain
+        state: verified
+      changed_when: false
+      loop:
+        - ca
+        - domain
