@@ -16,7 +16,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_selfservice_delete | default([], true) | select() | list }}"
+      loop: "{{ ipa_selfservice_delete | default([]) | select() | list }}"
 
     - name: Remove group members
       ipagroup:
@@ -26,7 +26,7 @@
         group: "{{ item.groups | default(omit) }}"
         action: member
         state: absent  
-      loop: "{{ ipa_group_members_remove | default([], true) | select() | list }}"
+      loop: "{{ ipa_group_members_remove | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -35,7 +35,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_users_delete | default([], true) | select() | list }}"
+      loop: "{{ ipa_users_delete | default([]) | select() | list }}"
       when: operate_one_by_one | bool
 
     # Loop to display items
@@ -44,7 +44,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ [ipa_users_delete | default([], true)] | select() | list }}"
+      loop: "{{ [ipa_users_delete | default([])] | select() | list }}"
       when: not operate_one_by_one | bool
 
     - name: Delete group
@@ -52,7 +52,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_groups_delete | default([], true) | select() | list }}"
+      loop: "{{ ipa_groups_delete | default([]) | select() | list }}"
       when: operate_one_by_one | bool
 
     # Loop to display items
@@ -61,7 +61,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ [ipa_groups_delete | default([], true)] | select() | list }}"
+      loop: "{{ [ipa_groups_delete | default([])] | select() | list }}"
       when: not operate_one_by_one | bool
 
     - name: Create group
@@ -70,7 +70,7 @@
         name: "{{ item.name }}"
         gidnumber: "{{ item.gid | default(omit) }}"
         state: present
-      loop: "{{ ipa_groups_create | default([], true) | select() | list }}"
+      loop: "{{ ipa_groups_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
       # https://github.com/freeipa/ansible-freeipa/issues/879
@@ -82,7 +82,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: present
-      loop: "{{ [ipa_groups_create | default([], true)] | select() | list }}"
+      loop: "{{ [ipa_groups_create | default([])] | select() | list }}"
       loop_control:
         index_var: i
         label: "{{ item[i].name }}"
@@ -106,7 +106,7 @@
         passwordexpiration: "{{ item.passwordexpiration | default(omit) }}"
         update_password: on_create
         state: present
-      loop: "{{ ipa_users_create | default([], true) | select() | list }}"
+      loop: "{{ ipa_users_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
       when: operate_one_by_one | bool
@@ -118,7 +118,7 @@
         users: "{{ item }}"
         update_password: on_create
         state: present
-      loop: "{{ [ipa_users_create | default([], true)] | select() | list }}"
+      loop: "{{ [ipa_users_create | default([])] | select() | list }}"
       loop_control:
         index_var: i
         label: "{{ item[i].name }}"
@@ -132,7 +132,7 @@
         group: "{{ item.groups | default(omit) }}"
         action: member
         state: present
-      loop: "{{ ipa_group_members_add | default([], true) | select() | list }}"
+      loop: "{{ ipa_group_members_add | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -143,6 +143,6 @@
         attribute: "{{ item.attributes }}"
         permission: "{{ item.permissions }}"
         state: present
-      loop: "{{ ipa_selfservice_create | default([], true) | select() | list }}"
+      loop: "{{ ipa_selfservice_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"

@@ -53,7 +53,7 @@ with identity and policy data, and connect clients:
 
 ```
 # Edit inventory and settings to suite local environment
-vi inventory vars_ipa.yml vars_data.yml
+vi inventory vars_ipa.yml
 # By default no AD trust, use internal CA, no DNS setup
 less vars_ad.yml vars_ca.yml vars_dns.yml
 # Install IPA/IdM first server
@@ -62,8 +62,11 @@ ansible-playbook -i inventory ipa_server_install.yml
 ansible-playbook -i inventory ipa_replica_install.yml
 # Configure IPA/IdM cluster servers
 ansible-playbook -i inventory ipa_cluster_configure.yml
+# Edit identity and policy data as needed
+vi vars_users.yml vars_sudo.yml
 # Setup and populate IPA/IdM identity and policy data
-ansible-playbook -i inventory ipa_data_setup.yml
+ansible-playbook -i inventory ipa_setup_users.yml
+ansible-playbook -i inventory ipa_setup_sudo.yml
 # Backup and update IPA/IdM cluster
 ansible-playbook -i inventory ipa_backup_create.yml
 ansible-playbook -i inventory ipa_cluster_update.yml

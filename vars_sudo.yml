@@ -1,4 +1,3 @@
----
 # List of sudo rules to delete
 ipa_sudo_rules_delete:
 #  - Test sudo rule

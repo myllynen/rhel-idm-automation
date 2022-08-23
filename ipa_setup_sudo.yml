@@ -12,7 +12,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_sudo_rules_delete | select() | list }}"
+      loop: "{{ ipa_sudo_rules_delete | default([]) | select() | list }}"
 
     - name: Remove sudo rule properties
       ipasudorule:
@@ -27,7 +27,7 @@
         sudooption: "{{ item.sudo_options | default(omit) }}"
         action: member
         state: absent
-      loop: "{{ ipa_sudo_rule_properties_remove | select() | list }}"
+      loop: "{{ ipa_sudo_rule_properties_remove | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -38,7 +38,7 @@
         sudocmd: "{{ item.commands }}"
         action: member
         state: absent
-      loop: "{{ ipa_sudo_command_group_members_remove | select() | list }}"
+      loop: "{{ ipa_sudo_command_group_members_remove | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -47,21 +47,21 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_sudo_command_groups_delete | select() | list }}"
+      loop: "{{ ipa_sudo_command_groups_delete | default([]) | select() | list }}"
 
     - name: Delete sudo command
       ipasudocmd:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_sudo_commands_delete | select() | list }}"
+      loop: "{{ ipa_sudo_commands_delete | default([]) | select() | list }}"
 
     - name: Create sudo command
       ipasudocmd:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: present
-      loop: "{{ ipa_sudo_commands_create | select() | list }}"
+      loop: "{{ ipa_sudo_commands_create | default([]) | select() | list }}"
 
     - name: Create sudo command group
       ipasudocmdgroup:
@@ -69,7 +69,7 @@
         name: "{{ item.name }}"
         sudocmd: "{{ item.commands | default(omit) }}"
         state: present
-      loop: "{{ ipa_sudo_command_groups_create | select() | list }}"
+      loop: "{{ ipa_sudo_command_groups_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -89,6 +89,6 @@
         cmdcategory: "{{ 'all' if 'commands' not in item and 'command_groups' not in item else '' }}"
         sudooption: "{{ item.sudo_options | default(omit) }}"
         state: present
-      loop: "{{ ipa_group_sudorules_create | select() | list }}"
+      loop: "{{ ipa_group_sudorules_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
