@@ -11,12 +11,22 @@
     # NB. Does not apply to all operations
     operate_one_by_one: false
   tasks:
-    - name: Delete user self service rule
-      ipaselfservice:
+    # Loop to display items
+    - name: Delete groups
+      ipagroup:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_selfservice_delete | default([]) | select() | list }}"
+      loop: "{{ [ipa_groups_delete | default([])] | select() | list }}"
+      when: not operate_one_by_one | bool
+
+    - name: Delete group
+      ipagroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ ipa_groups_delete | default([]) | select() | list }}"
+      when: operate_one_by_one | bool
 
     - name: Remove group members
       ipagroup:
@@ -30,14 +40,6 @@
       loop_control:
         label: "{{ item.name }}"
 
-    - name: Delete user
-      ipauser:
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
-      loop: "{{ ipa_users_delete | default([]) | select() | list }}"
-      when: operate_one_by_one | bool
-
     # Loop to display items
     - name: Delete users
       ipauser:
@@ -47,22 +49,26 @@
       loop: "{{ [ipa_users_delete | default([])] | select() | list }}"
       when: not operate_one_by_one | bool
 
-    - name: Delete group
-      ipagroup:
+    - name: Delete user
+      ipauser:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_groups_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_users_delete | default([]) | select() | list }}"
       when: operate_one_by_one | bool
 
     # Loop to display items
-    - name: Delete groups
+    - name: Create groups
       ipagroup:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
-        state: absent
-      loop: "{{ [ipa_groups_delete | default([])] | select() | list }}"
-      when: not operate_one_by_one | bool
+        state: present
+      loop: "{{ [ipa_groups_create | default([])] | select() | list }}"
+      loop_control:
+        index_var: i
+        label: "{{ item[i].name }}"
+      # https://github.com/freeipa/ansible-freeipa/issues/879
+      when: false and not operate_one_by_one | bool
 
     - name: Create group
       ipagroup:
@@ -77,17 +83,17 @@
       when: true or operate_one_by_one | bool
 
     # Loop to display items
-    - name: Create groups
-      ipagroup:
+    - name: Create users
+      ipauser:
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
+        users: "{{ item }}"
+        update_password: on_create
         state: present
-      loop: "{{ [ipa_groups_create | default([])] | select() | list }}"
+      loop: "{{ [ipa_users_create | default([])] | select() | list }}"
       loop_control:
         index_var: i
         label: "{{ item[i].name }}"
-      # https://github.com/freeipa/ansible-freeipa/issues/879
-      when: false and not operate_one_by_one | bool
+      when: not operate_one_by_one | bool
 
     - name: Create user
       ipauser:
@@ -111,19 +117,6 @@
         label: "{{ item.name }}"
       when: operate_one_by_one | bool
 
-    # Loop to display items
-    - name: Create users
-      ipauser:
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        users: "{{ item }}"
-        update_password: on_create
-        state: present
-      loop: "{{ [ipa_users_create | default([])] | select() | list }}"
-      loop_control:
-        index_var: i
-        label: "{{ item[i].name }}"
-      when: not operate_one_by_one | bool
-
     - name: Add group members
       ipagroup:
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -135,6 +128,13 @@
       loop: "{{ ipa_group_members_add | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
+
+    - name: Delete user self service rule
+      ipaselfservice:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ ipa_selfservice_delete | default([]) | select() | list }}"
 
     - name: Create user self service rules
       ipaselfservice:
