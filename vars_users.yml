@@ -9,11 +9,11 @@ ipa_users_delete:
 # List of group members to remove
 # Mandatory parameters: name
 ipa_group_members_remove:
-  - name: admingroup
-    users:
-      - oldadmin
-    groups:
-      - admgroup
+#  - name: admingroup
+#    users:
+#      - oldadmin
+#    groups:
+#      - admgroup
 
 
 # List of groups to create
