@@ -89,6 +89,6 @@
         cmdcategory: "{{ 'all' if 'commands' not in item and 'command_groups' not in item else '' }}"
         sudooption: "{{ item.sudo_options | default(omit) }}"
         state: present
-      loop: "{{ ipa_group_sudorules_create | default([]) | select() | list }}"
+      loop: "{{ ipa_sudo_rules_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"

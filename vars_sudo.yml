@@ -39,9 +39,9 @@ ipa_sudo_command_groups_create:
     commands:
       - /usr/bin/su
 
-# List of group sudo rules to create
+# List of sudo rules to create
 # Mandatory parameters: name
-ipa_group_sudorules_create:
+ipa_sudo_rules_create:
   - name: Admin sudo rule
     description: Test rule
     # Allowed for all users by default,
