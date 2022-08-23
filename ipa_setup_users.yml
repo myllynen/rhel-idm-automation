@@ -1,9 +1,9 @@
 ---
-- name: Setup IPA/IdM data
+- name: Setup IPA/IdM users and groups
   hosts: ipaserver
   become: true
   vars_files:
-    - vars_data.yml
+    - vars_test.yml
     - vault_ipa.yml
   vars:
     # Operating one by one is much slower but
@@ -16,14 +16,26 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_selfservice_delete | select() | list }}"
+      loop: "{{ ipa_selfservice_delete | default([], true) | select() | list }}"
+
+    - name: Remove group members
+      ipagroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        user: "{{ item.users | default(omit) }}"
+        group: "{{ item.groups | default(omit) }}"
+        action: member
+        state: absent  
+      loop: "{{ ipa_group_members_remove | default([], true) | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
 
     - name: Delete user
       ipauser:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_users_delete | select() | list }}"
+      loop: "{{ ipa_users_delete | default([], true) | select() | list }}"
       when: operate_one_by_one | bool
 
     # Loop to display items
@@ -32,7 +44,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ [ipa_users_delete] | select() | list }}"
+      loop: "{{ [ipa_users_delete | default([], true)] | select() | list }}"
       when: not operate_one_by_one | bool
 
     - name: Delete group
@@ -40,7 +52,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ ipa_groups_delete | select() | list }}"
+      loop: "{{ ipa_groups_delete | default([], true) | select() | list }}"
       when: operate_one_by_one | bool
 
     # Loop to display items
@@ -49,22 +61,8 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
-      loop: "{{ [ipa_groups_delete] | select() | list }}"
+      loop: "{{ [ipa_groups_delete | default([], true)] | select() | list }}"
       when: not operate_one_by_one | bool
-
-    - name: Delete sudo rule
-      ipasudorule:
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
-      loop: "{{ ipa_group_sudorules_delete | select() | list }}"
-
-    - name: Delete sudo command
-      ipasudocmd:
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
-      loop: "{{ ipa_sudo_commands_delete | select() | list }}"
 
     - name: Create group
       ipagroup:
@@ -72,7 +70,7 @@
         name: "{{ item.name }}"
         gidnumber: "{{ item.gid | default(omit) }}"
         state: present
-      loop: "{{ ipa_groups_create | select() | list }}"
+      loop: "{{ ipa_groups_create | default([], true) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
       # https://github.com/freeipa/ansible-freeipa/issues/879
@@ -84,7 +82,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: present
-      loop: "{{ [ipa_groups_create] | select() | list }}"
+      loop: "{{ [ipa_groups_create | default([], true)] | select() | list }}"
       loop_control:
         index_var: i
         label: "{{ item[i].name }}"
@@ -108,7 +106,7 @@
         passwordexpiration: "{{ item.passwordexpiration | default(omit) }}"
         update_password: on_create
         state: present
-      loop: "{{ ipa_users_create | select() | list }}"
+      loop: "{{ ipa_users_create | default([], true) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
       when: operate_one_by_one | bool
@@ -120,53 +118,21 @@
         users: "{{ item }}"
         update_password: on_create
         state: present
-      loop: "{{ [ipa_users_create] | select() | list }}"
+      loop: "{{ [ipa_users_create | default([], true)] | select() | list }}"
       loop_control:
         index_var: i
         label: "{{ item[i].name }}"
       when: not operate_one_by_one | bool
 
-    - name: Configure group members
+    - name: Add group members
       ipagroup:
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item.name }}"
-        user: "{{ item.members }}"
-        action: member
-      loop: "{{ ipa_groups_users | select() | list }}"
-      loop_control:
-        label: "{{ item.name }}"
-
-    - name: Create sudo command
-      ipasudocmd:
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: present
-      loop: "{{ ipa_sudo_commands_create | select() | list }}"
-
-    - name: Create sudo rule
-      ipasudorule:
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item.name }}"
-        description: "{{ item.description }}"
-        hostcategory: "{{ 'all' if 'hostgroups' not in item and 'hosts' not in item else omit }}"
-        hosts: "{{ item.hosts | default(omit) }}"
-        hostgroup: "{{ item.hostgroups | default(omit) }}"
-        cmdcategory: "{{ 'all' if 'sudocommands' not in item else omit }}"
-        allow_sudocmd: "{{ item.sudocommands | default(omit) }}"
-        state: present
-      loop: "{{ ipa_group_sudorules_create | select() | list }}"
-      loop_control:
-        label: "{{ item.name }}"
-
-    - name: Configure sudo rule members
-      ipasudorule:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"
-        sudooption: "{{ item.sudooptions | default(omit) }}"
         action: member
-      loop: "{{ ipa_group_sudorules_create | select() | list }}"
+        state: present
+      loop: "{{ ipa_group_members_add | default([], true) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -177,6 +143,6 @@
         attribute: "{{ item.attributes }}"
         permission: "{{ item.permissions }}"
         state: present
-      loop: "{{ ipa_selfservice_create | select() | list }}"
+      loop: "{{ ipa_selfservice_create | default([], true) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"

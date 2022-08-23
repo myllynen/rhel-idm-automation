@@ -1,0 +1,94 @@
+---
+- name: Setup IPA/IdM sudo rules
+  hosts: ipaserver
+  become: true
+  vars_files:
+    - vars_sudo.yml
+    - vault_ipa.yml
+  vars:
+  tasks:
+    - name: Delete sudo rule
+      ipasudorule:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ ipa_sudo_rules_delete | select() | list }}"
+
+    - name: Remove sudo rule properties
+      ipasudorule:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        user: "{{ item.users | default(omit) }}"
+        group: "{{ item.groups | default(omit) }}"
+        host: "{{ item.hosts | default(omit) }}"
+        hostgroup: "{{ item.hostgroups | default(omit) }}"
+        allow_sudocmd: "{{ item.commands | default(omit) }}"
+        allow_sudocmdgroup: "{{ item.command_groups | default(omit) }}"
+        sudooption: "{{ item.sudo_options | default(omit) }}"
+        action: member
+        state: absent
+      loop: "{{ ipa_sudo_rule_properties_remove | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Remove sudo command group members
+      ipasudocmdgroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        sudocmd: "{{ item.commands }}"
+        action: member
+        state: absent
+      loop: "{{ ipa_sudo_command_group_members_remove | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Delete sudo command group
+      ipasudocmdgroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ ipa_sudo_command_groups_delete | select() | list }}"
+
+    - name: Delete sudo command
+      ipasudocmd:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ ipa_sudo_commands_delete | select() | list }}"
+
+    - name: Create sudo command
+      ipasudocmd:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        state: present
+      loop: "{{ ipa_sudo_commands_create | select() | list }}"
+
+    - name: Create sudo command group
+      ipasudocmdgroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        sudocmd: "{{ item.commands | default(omit) }}"
+        state: present
+      loop: "{{ ipa_sudo_command_groups_create | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Create sudo rule
+      ipasudorule:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        description: "{{ item.description }}"
+        name: "{{ item.name }}"
+        user: "{{ item.users | default(omit) }}"
+        group: "{{ item.groups | default(omit) }}"
+        usercategory: "{{ 'all' if 'users' not in item and 'groups' not in item else '' }}"
+        host: "{{ item.hosts | default(omit) }}"
+        hostgroup: "{{ item.hostgroups | default(omit) }}"
+        hostcategory: "{{ 'all' if 'hosts' not in item and 'hostgroups' not in item else '' }}"
+        allow_sudocmd: "{{ item.commands | default(omit) }}"
+        allow_sudocmdgroup: "{{ item.command_groups | default(omit) }}"
+        cmdcategory: "{{ 'all' if 'commands' not in item and 'command_groups' not in item else '' }}"
+        sudooption: "{{ item.sudo_options | default(omit) }}"
+        state: present
+      loop: "{{ ipa_group_sudorules_create | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"

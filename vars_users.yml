@@ -1,4 +1,13 @@
 ---
+# List of group members to remove
+# Mandatory parameters: name
+ipa_group_members_remove:
+  - name: admingroup
+    users:
+      - oldadmin
+    groups:
+      - admgroup
+
 # List of users to delete
 ipa_users_delete:
   - olduser
@@ -6,6 +15,7 @@ ipa_users_delete:
 # List of groups to delete
 ipa_groups_delete:
   - oldgroup
+
 
 # List of groups to create
 # Mandatory parameters: name
@@ -33,54 +43,26 @@ ipa_users_create:
 #    principalexpiration: "2099-12-31 23:59"
 #    passwordexpiration: "2099-12-31 23:59"
 
-# List of groups with users
-# Mandatory parameters: name, groups
-ipa_groups_users:
+
+# List of group members to add
+# Mandatory parameters: name
+ipa_group_members_add:
   - name: admingroup
-    members:
+    users:
       - testuser
+    #groups:
+    #  - 
   - name: testgroup
-    members:
+    users:
       - testuser
 
-# List of sudo commands to delete
-ipa_sudo_commands_delete:
-#  - /usr/sbin/poweroff
-
-# List of sudo commands to create
-ipa_sudo_commands_create:
-  - /usr/bin/su
-
-# List of group sudo rules to delete
-ipa_group_sudorules_delete:
-#  - Test sudo rule
-
-# List of group sudo rules to create
-ipa_group_sudorules_create:
-  - name: Admin sudo rule
-    description: Test rule
-    #users:
-    #  - adminuser
-    groups:
-      - admingroup
-    # Available on all hosts by default,
-    # define hosts/groups to limit access
-    #hosts:
-    #  - somehost
-    #hostgroups:
-    #  - somegroup
-    # All commands are allowed by default,
-    # define sudocommands to limit access
-    sudocommands:
-      - /usr/bin/su
-    sudooptions:
-      - '!authenticate'
 
 # List of self service rules to delete
 ipa_selfservice_delete:
   - User Self service
 
 # List of self service rules to create
+# Mandatory parameters: name
 ipa_selfservice_create:
   - name: Self can change initials and login shell
     permissions:
