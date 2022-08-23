@@ -1,0 +1,39 @@
+# List of host groups to delete
+ipa_hostgroups_delete:
+  - oldhostgroup
+
+# List of hosts to delete
+ipa_hosts_delete:
+  - oldhost
+
+# List of hosts to disable
+ipa_hosts_disable:
+#  - somehost
+
+# List of host group members to remove
+# Mandatory parameters: name
+ipa_hostgroup_members_remove:
+  #- name: allhosts
+  #  hostgroups:
+  #    - dupegroup
+
+
+# List of host groups to create
+# Mandatory parameters: name
+ipa_hostgroups_create:
+  - name: allhosts
+    description: All hosts and servers
+  - name: devhosts
+    description: Development team hosts
+  - name: tmphosts
+
+# List of host groups members to add
+# Mandatory parameters: name
+ipa_hostgroup_members_add:
+  - name: allhosts
+    hostgroups:
+      - ipaservers
+      - devhosts
+  - name: devhosts
+    hosts:
+      - idmc.sub.example.com

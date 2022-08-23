@@ -1,0 +1,64 @@
+---
+- name: Setup IPA/IdM hosts and hostgroups
+  hosts: ipaserver
+  become: true
+  vars_files:
+    - vars_dns.yml
+    - vars_hosts.yml
+    - vault_ipa.yml
+  tasks:
+    - name: Delete host group
+      ipahostgroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ ipa_hostgroups_delete | default([]) | select() | list }}"
+
+    - name: Remove host group members
+      ipahostgroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        host: "{{ item.hosts | default(omit) }}"
+        hostgroup: "{{ item.hostgroups | default(omit) }}"
+        action: member
+        state: absent
+      loop: "{{ ipa_hostgroup_members_remove | default([]) | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Delete host
+      ipahost:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        update_dns: "{{ ipaserver_setup_dns }}"
+        state: absent
+      loop: "{{ ipa_hosts_delete | default([]) | select() | list }}"
+
+    - name: Disable host
+      ipahost:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item }}"
+        update_dns: "{{ ipaserver_setup_dns }}"
+        state: disabled
+      loop: "{{ ipa_hosts_disable | default([]) | select() | list }}"
+
+    - name: Create host group
+      ipahostgroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        description: "{{ item.description | default(omit) }}"
+        state: present
+      loop: "{{ ipa_hostgroups_create | default([]) | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Add host group members
+      ipahostgroup:
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        host: "{{ item.members.hosts | default(omit) }}"
+        hostgroup: "{{ item.members.hostgroups | default(omit) }}"
+        action: member
+      loop: "{{ ipa_hostgroup_members_add | default([]) | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
