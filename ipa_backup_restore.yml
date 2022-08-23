@@ -1,6 +1,6 @@
 ---
 - name: Restore IPA/IdM server backup
-  hosts: ipaserver
+  hosts: ipabackup
   become: true
   vars_files:
     - vault_ipa.yml
