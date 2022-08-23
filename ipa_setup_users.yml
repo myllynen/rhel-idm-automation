@@ -3,7 +3,7 @@
   hosts: ipaserver
   become: true
   vars_files:
-    - vars_test.yml
+    - vars_users.yml
     - vault_ipa.yml
   vars:
     # Operating one by one is much slower but

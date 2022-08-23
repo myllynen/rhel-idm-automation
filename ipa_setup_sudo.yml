@@ -76,8 +76,8 @@
     - name: Create sudo rule
       ipasudorule:
         ipaadmin_password: "{{ ipaadmin_password }}"
-        description: "{{ item.description }}"
         name: "{{ item.name }}"
+        description: "{{ item.description | default(omit) }}"
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"
         usercategory: "{{ 'all' if 'users' not in item and 'groups' not in item else '' }}"
