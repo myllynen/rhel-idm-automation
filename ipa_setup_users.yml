@@ -14,6 +14,7 @@
     # Loop to display items
     - name: Delete groups
       ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -22,6 +23,7 @@
 
     - name: Delete group
       ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -30,6 +32,7 @@
 
     - name: Remove group members
       ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
@@ -43,6 +46,7 @@
     # Loop to display items
     - name: Delete users
       ipauser:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -51,6 +55,7 @@
 
     - name: Delete user
       ipauser:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -60,6 +65,7 @@
     # Loop to display items
     - name: Create groups
       ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: present
@@ -72,6 +78,7 @@
 
     - name: Create group
       ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         gidnumber: "{{ item.gid | default(omit) }}"
@@ -85,6 +92,7 @@
     # Loop to display items
     - name: Create users
       ipauser:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         users: "{{ item }}"
         update_password: on_create
@@ -97,6 +105,7 @@
 
     - name: Create user
       ipauser:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         password: "{{ item.password | default(omit) }}"
@@ -119,6 +128,7 @@
 
     - name: Add group members
       ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
@@ -131,6 +141,7 @@
 
     - name: Delete user self service rule
       ipaselfservice:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -138,6 +149,7 @@
 
     - name: Create user self service rules
       ipaselfservice:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         attribute: "{{ item.attributes }}"

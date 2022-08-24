@@ -29,6 +29,7 @@
 
     - name: Configure servers visible
       ipaserver:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         hidden: false
@@ -36,12 +37,14 @@
 
     - name: Configure CA renewal server
       ipaconfig:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         ca_renewal_master_server: "{{ ipa_ca_renewal_server }}"
       when: ipa_ca_renewal_server | default(false)
 
     - name: Configure servers hidden
       ipaserver:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         hidden: true
@@ -49,6 +52,7 @@
 
     - name: Add topology segment
       ipatopologysegment:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         suffix: "{{ item.suffix }}"
         name: "{{ item.name | default(omit) }}"
@@ -59,6 +63,7 @@
 
     - name: Remove topology segment
       ipatopologysegment:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         suffix: "{{ item.suffix }}"
         name: "{{ item.name | default(omit) }}"
@@ -69,6 +74,7 @@
 
     - name: Verify topology suffix
       ipatopologysuffix:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         suffix: domain
         state: verified

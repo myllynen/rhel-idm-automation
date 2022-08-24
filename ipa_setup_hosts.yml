@@ -9,6 +9,7 @@
   tasks:
     - name: Delete host group
       ipahostgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -16,6 +17,7 @@
 
     - name: Remove host group members
       ipahostgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         host: "{{ item.hosts | default(omit) }}"
@@ -28,6 +30,7 @@
 
     - name: Delete host
       ipahost:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         update_dns: "{{ ipaserver_setup_dns }}"
@@ -36,6 +39,7 @@
 
     - name: Disable host
       ipahost:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         update_dns: "{{ ipaserver_setup_dns }}"
@@ -44,6 +48,7 @@
 
     - name: Create host group
       ipahostgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
@@ -54,6 +59,7 @@
 
     - name: Add host group members
       ipahostgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         host: "{{ item.hosts | default(omit) }}"

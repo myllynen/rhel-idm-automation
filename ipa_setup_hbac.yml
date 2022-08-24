@@ -8,6 +8,7 @@
   tasks:
     - name: Configure default allow_all HBAC rule
       ipahbacrule:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: allow_all
         state: "{{ ipa_hbac_allow_all }}"
@@ -15,6 +16,7 @@
 
     - name: Delete HBAC rule
       ipahbacrule:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -22,6 +24,7 @@
 
     - name: Remove HBAC rule properties
       ipahbacrule:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
@@ -38,6 +41,7 @@
 
     - name: Remove HBAC service group members
       ipahbacsvcgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         services: "{{ item.services | default(omit) }}"
@@ -49,6 +53,7 @@
 
     - name: Delete HBAC service group
       ipahbacsvcgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -56,6 +61,7 @@
 
     - name: Delete HBAC service
       ipahbacsvc:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -63,6 +69,7 @@
 
     - name: Create HBAC service
       ipahbacsvc:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
@@ -73,6 +80,7 @@
 
     - name: Create HBAC service group
       ipahbacsvcgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
@@ -84,6 +92,7 @@
 
     - name: Create HBAC rule
       ipahbacrule:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"

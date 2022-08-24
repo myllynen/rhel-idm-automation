@@ -8,6 +8,7 @@
   tasks:
     - name: Delete sudo rule
       ipasudorule:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -15,6 +16,7 @@
 
     - name: Remove sudo rule properties
       ipasudorule:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
@@ -32,6 +34,7 @@
 
     - name: Remove sudo command group members
       ipasudocmdgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         sudocmd: "{{ item.commands | default(omit) }}"
@@ -43,6 +46,7 @@
 
     - name: Delete sudo command group
       ipasudocmdgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -50,6 +54,7 @@
 
     - name: Delete sudo command
       ipasudocmd:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: absent
@@ -57,6 +62,7 @@
 
     - name: Create sudo command
       ipasudocmd:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         state: present
@@ -64,6 +70,7 @@
 
     - name: Create sudo command group
       ipasudocmdgroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         sudocmd: "{{ item.commands | default(omit) }}"
@@ -74,6 +81,7 @@
 
     - name: Create sudo rule
       ipasudorule:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"

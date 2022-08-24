@@ -6,21 +6,25 @@
     - vars_ad.yml
     - vault_ipa.yml
   tasks:
-  - name: Establish one-way AD trust
-    ipatrust:
-      realm: "{{ ipatrust_ad_realm }}"
-      base_id: "{{ ipatrust_ad_base_id }}"
-      admin: "{{ ipatrust_ad_admin_username }}"
-      password: "{{ ipatrust_ad_admin_password }}"
-      two_way: false
-      state: present
-    when: not ipatrust_ad_two_way_trust | bool
+    - name: Establish one-way AD trust
+      ipatrust:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        realm: "{{ ipatrust_ad_realm }}"
+        base_id: "{{ ipatrust_ad_base_id }}"
+        admin: "{{ ipatrust_ad_admin_username }}"
+        password: "{{ ipatrust_ad_admin_password }}"
+        two_way: false
+        state: present
+      when: not ipatrust_ad_two_way_trust | bool
 
-  - name: Establish two-way AD trust
-    ipatrust:
-      realm: "{{ ipatrust_ad_realm }}"
-      base_id: "{{ ipatrust_ad_base_id }}"
-      trust_secret: "{{ ipatrust_trust_secret }}"
-      two_way: true
-      state: present
-    when: ipatrust_ad_two_way_trust | bool
+    - name: Establish two-way AD trust
+      ipatrust:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        realm: "{{ ipatrust_ad_realm }}"
+        base_id: "{{ ipatrust_ad_base_id }}"
+        trust_secret: "{{ ipatrust_trust_secret }}"
+        two_way: true
+        state: present
+      when: ipatrust_ad_two_way_trust | bool
