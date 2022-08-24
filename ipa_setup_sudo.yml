@@ -5,7 +5,6 @@
   vars_files:
     - vars_sudo.yml
     - vault_ipa.yml
-  vars:
   tasks:
     - name: Delete sudo rule
       ipasudorule:
@@ -35,7 +34,7 @@
       ipasudocmdgroup:
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
-        sudocmd: "{{ item.commands }}"
+        sudocmd: "{{ item.commands | default(omit) }}"
         action: member
         state: absent
       loop: "{{ ipa_sudo_command_group_members_remove | default([]) | select() | list }}"

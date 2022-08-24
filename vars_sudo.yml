@@ -2,7 +2,7 @@
 ipa_sudo_rules_delete:
 #  - Test sudo rule
 
-# List of sudo rule properties remove
+# List of sudo rule properties to remove
 # Mandatory parameters: name
 ipa_sudo_rule_properties_remove:
 #  - name: Admin sudo rule
