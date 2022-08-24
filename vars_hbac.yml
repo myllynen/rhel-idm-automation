@@ -1,0 +1,57 @@
+# Status of the default allow_all HBAC rule
+ipa_hbac_allow_all: disabled
+
+# List of HBAC rules to delete
+ipa_hbac_rules_delete:
+  - Old HBAC rule
+
+# List of HBAC rule properties to remove
+# Mandatory parameters: name
+ipa_hbac_rule_properties_remove:
+#  - name: Test HBAC rule
+#    hostgroups:
+#      - wronggroup
+#    service_groups:
+#      - telnet
+
+# List of HBAC service group members to remove
+# Mandatory parameters: name
+ipa_hbac_service_group_members_remove:
+#  - name: Remote monitoring
+#    services:
+#      - remote_test
+
+# List of HBAC service groups to delete
+ipa_hbac_service_groups_delete:
+  - insecure login
+
+# List of HBAC services to delete
+ipa_hbac_services_delete:
+  - telnet
+
+
+# List of HBAC services to create
+# Mandatory parameters: name
+ipa_hbac_services_create:
+  - name: sshd
+    description: sshd
+
+# List of HBAC service groups to create
+# Mandatory parameters: name
+ipa_hbac_service_groups_create:
+  - name: secure login
+    description: Secure remote login
+    services:
+      - sshd
+
+# List of HBAC rules to create
+# Mandatory parameters: name
+ipa_hbac_rules_create:
+  - name: allow_testuser_ssh_idmc
+    description: Allow testuser to securely login to idmc
+    users:
+      - testuser
+    hosts:
+      - idmc.sub.example.com
+    service_groups:
+      - secure login
