@@ -5,6 +5,8 @@
   vars_files:
     - vault_ipa.yml
   vars:
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2121099
+    ipa_admin_password_expire: 2089-12-31 23:59:59
     # TODO: Configure CRL publisher server
     # https://github.com/freeipa/ansible-freeipa/issues/883
     ipa_ca_renewal_server: idm1.sub.example.com
@@ -26,6 +28,14 @@
           - ipa_ca_renewal_server not in ipa_servers_hidden | select() | list
         fail_msg: "CA renewal server cannot be hidden"
         success_msg: "Configuration verified"
+
+    - name: Configure admin password expiration
+      ipauser:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ ipaadmin_principal }}"
+        passwordexpiration: "{{ ipa_admin_password_expire }}"
+      when: ipa_admin_password_expire | default(false)
 
     - name: Configure servers visible
       ipaserver:
