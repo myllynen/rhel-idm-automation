@@ -14,36 +14,6 @@
         state: absent
       loop: "{{ ipa_sudo_rules_delete | default([]) | select() | list }}"
 
-    - name: Remove sudo rule properties
-      ipasudorule:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item.name }}"
-        user: "{{ item.users | default(omit) }}"
-        group: "{{ item.groups | default(omit) }}"
-        host: "{{ item.hosts | default(omit) }}"
-        hostgroup: "{{ item.hostgroups | default(omit) }}"
-        allow_sudocmd: "{{ item.commands | default(omit) }}"
-        allow_sudocmdgroup: "{{ item.command_groups | default(omit) }}"
-        sudooption: "{{ item.sudo_options | default(omit) }}"
-        action: member
-        state: absent
-      loop: "{{ ipa_sudo_rule_properties_remove | default([]) | select() | list }}"
-      loop_control:
-        label: "{{ item.name }}"
-
-    - name: Remove sudo command group members
-      ipasudocmdgroup:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item.name }}"
-        sudocmd: "{{ item.commands | default(omit) }}"
-        action: member
-        state: absent
-      loop: "{{ ipa_sudo_command_group_members_remove | default([]) | select() | list }}"
-      loop_control:
-        label: "{{ item.name }}"
-
     - name: Delete sudo command group
       ipasudocmdgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -74,6 +44,7 @@
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item.name }}"
         sudocmd: "{{ item.commands | default(omit) }}"
+        action: sudocmdgroup
         state: present
       loop: "{{ ipa_sudo_command_groups_create | default([]) | select() | list }}"
       loop_control:
@@ -95,6 +66,7 @@
         allow_sudocmdgroup: "{{ item.command_groups | default(omit) }}"
         cmdcategory: "{{ 'all' if 'commands' not in item and 'command_groups' not in item else '' }}"
         sudooption: "{{ item.sudo_options | default(omit) }}"
+        action: sudorule
         state: present
       loop: "{{ ipa_sudo_rules_create | default([]) | select() | list }}"
       loop_control:

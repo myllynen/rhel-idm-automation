@@ -2,22 +2,6 @@
 ipa_sudo_rules_delete:
 #  - Test sudo rule
 
-# List of sudo rule properties to remove
-# Mandatory parameters: name
-ipa_sudo_rule_properties_remove:
-#  - name: Admin sudo rule
-#    hostgroups:
-#      - wronggroup
-#    sudooptions:
-#      - 'badoption'
-
-# List of sudo command group members to remove
-# Mandatory parameters: name
-ipa_sudo_command_group_members_remove:
-#  - name: Full admin
-#    commands:
-#      - /usr/sbin/poweroff
-
 # List of sudo command groups to delete
 ipa_sudo_command_groups_delete:
   - oldsudocmdgroup
@@ -32,14 +16,14 @@ ipa_sudo_commands_create:
   - /usr/bin/su
   - /usr/sbin/reboot
 
-# List of sudo command groups to create
+# List of sudo command groups to create or update
 # Mandatory parameters: name
 ipa_sudo_command_groups_create:
   - name: Full admin
     commands:
       - /usr/bin/su
 
-# List of sudo rules to create
+# List of sudo rules to create or update
 # Mandatory parameters: name
 ipa_sudo_rules_create:
   - name: Admin sudo rule

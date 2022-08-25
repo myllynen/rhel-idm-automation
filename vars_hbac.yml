@@ -5,22 +5,6 @@ ipa_hbac_allow_all: disabled
 ipa_hbac_rules_delete:
   - Old HBAC rule
 
-# List of HBAC rule properties to remove
-# Mandatory parameters: name
-ipa_hbac_rule_properties_remove:
-#  - name: Test HBAC rule
-#    hostgroups:
-#      - wronggroup
-#    service_groups:
-#      - telnet
-
-# List of HBAC service group members to remove
-# Mandatory parameters: name
-ipa_hbac_service_group_members_remove:
-#  - name: Remote monitoring
-#    services:
-#      - remote_test
-
 # List of HBAC service groups to delete
 ipa_hbac_service_groups_delete:
   - insecure login
@@ -36,7 +20,7 @@ ipa_hbac_services_create:
   - name: sshd
     description: sshd
 
-# List of HBAC service groups to create
+# List of HBAC service groups to create or update
 # Mandatory parameters: name
 ipa_hbac_service_groups_create:
   - name: secure login
@@ -44,7 +28,7 @@ ipa_hbac_service_groups_create:
     services:
       - sshd
 
-# List of HBAC rules to create
+# List of HBAC rules to create or update
 # Mandatory parameters: name
 ipa_hbac_rules_create:
   - name: allow_testuser_ssh_idmc

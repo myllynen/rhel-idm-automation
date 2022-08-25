@@ -22,35 +22,6 @@
         state: absent
       loop: "{{ ipa_hbac_rules_delete | default([]) | select() | list }}"
 
-    - name: Remove HBAC rule properties
-      ipahbacrule:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item.name }}"
-        user: "{{ item.users | default(omit) }}"
-        group: "{{ item.groups | default(omit) }}"
-        host: "{{ item.hosts | default(omit) }}"
-        hostgroup: "{{ item.hostgroups | default(omit) }}"
-        services: "{{ item.services | default(omit) }}"
-        service_groups: "{{ item.service_groups | default(omit) }}"
-        action: member
-        state: absent
-      loop: "{{ ipa_hbac_rule_properties_remove | default([]) | select() | list }}"
-      loop_control:
-        label: "{{ item.name }}"
-
-    - name: Remove HBAC service group members
-      ipahbacsvcgroup:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item.name }}"
-        services: "{{ item.services | default(omit) }}"
-        action: member
-        state: absent
-      loop: "{{ ipa_hbac_service_group_members_remove | default([]) | select() | list }}"
-      loop_control:
-        label: "{{ item.name }}"
-
     - name: Delete HBAC service group
       ipahbacsvcgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -85,6 +56,7 @@
         name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
         hbacsvc: "{{ item.services | default(omit) }}"
+        action: hbacsvcgroup
         state: present
       loop: "{{ ipa_hbac_service_groups_create | default([]) | select() | list }}"
       loop_control:
@@ -105,6 +77,7 @@
         hbacsvc: "{{ item.services | default(omit) }}"
         hbacsvcgroup: "{{ item.service_groups | default(omit) }}"
         servicecategory: "{{ 'all' if 'services' not in item and 'service_groups' not in item else '' }}"
+        action: hbacrule
         state: present
       loop: "{{ ipa_hbac_rules_create | default([]) | select() | list }}"
       loop_control:
