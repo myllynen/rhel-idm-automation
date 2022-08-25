@@ -33,7 +33,7 @@
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
-        update_dns: "{{ ipaserver_setup_dns }}"
+        update_dns: "{{ ipaserver_setup_dns | default(false) }}"
         state: absent
       loop: "{{ ipa_hosts_delete | default([]) | select() | list }}"
 
