@@ -24,7 +24,7 @@ ipa_groups_create:
   - name: testgroup
     gid: 12345
 
-# List of users to create
+# List of users to create or update
 # Mandatory parameters: name, first, last
 ipa_users_create:
   - name: testuser
@@ -45,12 +45,16 @@ ipa_users_create:
 # List of group members to add
 # Mandatory parameters: name
 ipa_group_members_add:
-  - name: admingroup
+  - name: testgroup
     users:
       - testuser
     #groups:
     #  - 
-  - name: testgroup
+
+# List of group members to explicitly set
+# Mandatory parameters: name
+ipa_group_members_set:
+  - name: admingroup
     users:
       - testuser
 

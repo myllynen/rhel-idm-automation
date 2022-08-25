@@ -71,8 +71,7 @@
         state: present
       loop: "{{ [ipa_groups_create | default([])] | select() | list }}"
       loop_control:
-        index_var: i
-        label: "{{ item[i].name }}"
+        label: "{{ item | map(attribute='name') }}"
       # https://github.com/freeipa/ansible-freeipa/issues/879
       when: false and not operate_one_by_one | bool
 
@@ -99,8 +98,7 @@
         state: present
       loop: "{{ [ipa_users_create | default([])] | select() | list }}"
       loop_control:
-        index_var: i
-        label: "{{ item[i].name }}"
+        label: "{{ item | map(attribute='name') }}"
       when: not operate_one_by_one | bool
 
     - name: Create user
@@ -136,6 +134,19 @@
         action: member
         state: present
       loop: "{{ ipa_group_members_add | default([]) | select() | list }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Set group members
+      ipagroup:
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
+        name: "{{ item.name }}"
+        user: "{{ item.users | default(omit) }}"
+        group: "{{ item.groups | default(omit) }}"
+        action: group
+        state: present
+      loop: "{{ ipa_group_members_set | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
 

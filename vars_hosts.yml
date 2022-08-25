@@ -18,6 +18,10 @@ ipa_hostgroup_members_remove:
   #    - dupegroup
 
 
+# List of host entries to create
+ipa_hosts_create:
+  - idmc.sub.example.com
+
 # List of host groups to create
 # Mandatory parameters: name
 ipa_hostgroups_create:
@@ -34,6 +38,12 @@ ipa_hostgroup_members_add:
     hostgroups:
       - ipaservers
       - devhosts
+
+# List of host groups members to explicitly set
+# Mandatory parameters: name
+ipa_hostgroup_members_set:
   - name: devhosts
     hosts:
       - idmc.sub.example.com
+    #hostgroups:
+    #  -
