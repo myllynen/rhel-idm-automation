@@ -80,7 +80,7 @@
       loop_control:
         label: "{{ item.name }}"
 
-    - name: Set host group members
+    - name: Explicitly set host group members
       ipahostgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"

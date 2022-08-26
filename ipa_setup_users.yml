@@ -137,7 +137,7 @@
       loop_control:
         label: "{{ item.name }}"
 
-    - name: Set group members
+    - name: Explicitly set group members
       ipagroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
