@@ -25,8 +25,16 @@ Ansible playbooks for RHEL IdM automation.
   * Playbook to setup IdM AD trust
 * [ipa_setup_users.yml](ipa_setup_users.yml) |
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-user.md),
-  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-group.md)
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-group.md),
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-selfservice.md)
   * Playbook to setup users and groups
+* [ipa_setup_hosts.yml](ipa_setup_hosts.yml) |
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-host.md),
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hostgroup.md)
+* [ipa_setup_hbac.yml](ipa_setup_hbac.yml) |
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hbacsvc.md),
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hbacsvcgroup.md),
+  [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hbacrule.md)
 * [ipa_setup_sudo.yml](ipa_setup_sudo.yml) |
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-sudocmd.md),
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-sudocmdgroup.md),
@@ -66,6 +74,8 @@ ansible-playbook -i inventory ipa_cluster_configure.yml
 vi vars_users.yml vars_sudo.yml
 # Setup and populate IPA/IdM identity and policy data
 ansible-playbook -i inventory ipa_setup_users.yml
+ansible-playbook -i inventory ipa_setup_hosts.yml
+ansible-playbook -i inventory ipa_setup_hbac.yml
 ansible-playbook -i inventory ipa_setup_sudo.yml
 # Backup and update IPA/IdM cluster
 ansible-playbook -i inventory ipa_backup_create.yml
