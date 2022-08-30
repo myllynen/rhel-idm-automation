@@ -18,8 +18,8 @@ ipaserver_setup_firewalld: "{{ ipacluster_setup_firewalld }}"
 ipaserver_firewalld_zone: "{{ ipacluster_firewalld_zone }}"
 
 # UID/GID range
-ipaserver_idstart: 1000
-ipaserver_idmax: 999999
+ipaserver_idstart: 100000
+ipaserver_idmax:   999999
 
 # Testing
 #ipaserver_no_host_dns: true
