@@ -31,10 +31,12 @@ Ansible playbooks for RHEL IdM automation.
 * [ipa_setup_hosts.yml](ipa_setup_hosts.yml) |
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-host.md),
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hostgroup.md)
+  * Playbook to setup hosts and hostgroups
 * [ipa_setup_hbac.yml](ipa_setup_hbac.yml) |
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hbacsvc.md),
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hbacsvcgroup.md),
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-hbacrule.md)
+  * Playbook to setup HBAC services and rules
 * [ipa_setup_sudo.yml](ipa_setup_sudo.yml) |
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-sudocmd.md),
   [doc](https://github.com/freeipa/ansible-freeipa/blob/master/README-sudocmdgroup.md),
