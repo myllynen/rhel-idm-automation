@@ -1,12 +1,12 @@
-# IPA/IdM servers must use correct FQDN and resolv.conf
-
 #
-# Common configuration
+# IPA/IdM common configuration
 #
 ipacluster_domain: sub.example.com
 ipacluster_realm: "{{ ipacluster_domain | upper }}"
 ipacluster_setup_firewalld: true
 ipacluster_firewalld_zone: public
+
+# IPA/IdM servers must use correct FQDN and resolv.conf
 
 #
 # First server configuration

@@ -1,6 +1,7 @@
 #
 # IPA/IdM CA configuration
 #
+
 ipaserver_setup_ca: true
 ipaserver_setup_kra: true
 ipaserver_no_pkinit: false
