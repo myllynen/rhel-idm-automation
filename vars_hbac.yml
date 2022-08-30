@@ -19,6 +19,8 @@ ipa_hbac_services_delete:
 ipa_hbac_services_create:
   - name: sshd
     description: sshd
+  - name: sudo
+    description: sudo
 
 # List of HBAC service groups to create or update
 # Mandatory parameters: name
@@ -31,11 +33,13 @@ ipa_hbac_service_groups_create:
 # List of HBAC rules to create or update
 # Mandatory parameters: name
 ipa_hbac_rules_create:
-  - name: allow_testuser_ssh_idmc
-    description: Allow testuser to securely login to idmc
+  - name: allow_testuser_idmc
+    description: Allow testuser to idmc
     users:
       - testuser
     hosts:
       - idmc.sub.example.com
+    services:
+      - sudo
     service_groups:
       - secure login
