@@ -73,7 +73,7 @@ ansible-playbook -i inventory ipa_replica_install.yml
 # Configure IPA/IdM cluster servers
 ansible-playbook -i inventory ipa_cluster_configure.yml
 # Edit identity and policy data as needed
-vi vars_users.yml vars_sudo.yml
+vi vars_users.yml vars_hosts.yml vars_hbac.yml vars_sudo.yml
 # Setup and populate IPA/IdM identity and policy data
 ansible-playbook -i inventory ipa_setup_users.yml
 ansible-playbook -i inventory ipa_setup_hosts.yml
