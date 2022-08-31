@@ -13,7 +13,9 @@ ipa_sudo_commands_delete:
 
 # List of sudo commands to create
 ipa_sudo_commands_create:
+  - /usr/bin/id
   - /usr/bin/su
+  - /usr/bin/whoami
   - /usr/sbin/reboot
 
 # List of sudo command groups to create or update
@@ -21,7 +23,9 @@ ipa_sudo_commands_create:
 ipa_sudo_command_groups_create:
   - name: Full admin
     commands:
+      - /usr/bin/id
       - /usr/bin/su
+      - /usr/bin/whoami
 
 # List of sudo rules to create or update
 # Mandatory parameters: name
@@ -46,5 +50,10 @@ ipa_sudo_rules_create:
     #  - /usr/sbin/reboot
     command_groups:
       - Full admin
+    # Allowed RunAs users/groups, unset means 'root'
+    #runasusers:
+    #  - dbuser
+    #runasgroups:
+    #  - dbgroup
     sudo_options:
       - '!authenticate'

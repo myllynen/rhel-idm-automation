@@ -65,7 +65,12 @@
         allow_sudocmd: "{{ item.commands | default(omit) }}"
         allow_sudocmdgroup: "{{ item.command_groups | default(omit) }}"
         cmdcategory: "{{ 'all' if 'commands' not in item and 'command_groups' not in item else '' }}"
+        runasuser: "{{ item.runasusers | default(omit) }}"
+        runasgroup: "{{ item.runagroups | default(omit) }}"
+        #runasusercategory: "{{ 'all' if 'runasusers' not in item else omit }}"
+        #runasgroupcategory: "{{ 'all' if 'runasgroups' not in item else omit }}"
         sudooption: "{{ item.sudo_options | default(omit) }}"
+        order: "{{ item.order | default(omit) }}"
         action: sudorule
         state: present
       loop: "{{ ipa_sudo_rules_create | default([]) | select() | list }}"
