@@ -11,5 +11,5 @@
     ipabackup_keep_on_server: false
     #ipabackup_controller_path: /var/backup
   roles:
-  - role: ipabackup
-    state: present
+    - role: ipabackup
+      state: present

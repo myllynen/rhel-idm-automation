@@ -53,8 +53,8 @@ Ansible playbooks for RHEL IdM automation.
 
 Depending on the environment and requirements, separate vars files,
 group vars, variables defined in an inventory, or some other approach
-might be warranted. These examples aim to provide a known-good starting
-point for common installation types.
+might be warranted for providing IPA/IdM configuration. These examples
+aim to provide a known-good starting point for typical installations.
 
 ## Quick Usage Example
 
