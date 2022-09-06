@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2022 Marko Myllynen <myllynen@redhat.com>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+---
+galaxy_info:
+  author: Marko Myllynen <myllynen@redhat.com>
+  description: Ansible playbooks for RHEL IdM automation.
+  company: Red Hat, Inc.
+
+  issue_tracker_url: https://github.com/myllynen/rhel-idm-automation/issues
+
+  license: GPLv3+
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: EL
+      versions:
+        - 8
+        - 9
+
+  galaxy_tags:
+    - rhel
+    - centos
+    - freeipa
+    - idm
+    - automation
+    - configuration
+
+dependencies: []
