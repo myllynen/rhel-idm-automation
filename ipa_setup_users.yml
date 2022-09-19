@@ -38,7 +38,7 @@
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"
         action: member
-        state: absent  
+        state: absent
       loop: "{{ ipa_group_members_remove | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"

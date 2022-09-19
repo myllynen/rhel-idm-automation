@@ -16,8 +16,8 @@
     - name: Update all packages
       yum:
         name: '*'
-        state: latest
         update_cache: true
+        state: latest
       register: package_install
 
     - name: Check need for rebooting
@@ -25,7 +25,7 @@
       register: needs_restarting
       failed_when: false
       changed_when: false
-                    
+
     - name: Reboot system
       reboot:
       when: always_reboot | bool or
