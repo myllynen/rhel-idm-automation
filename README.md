@@ -51,10 +51,11 @@ Ansible playbooks for RHEL IdM automation.
 * [ipa_cluster_update.yml](ipa_cluster_update.yml) | [doc](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/installing_identity_management/update-downgrade-ipa_installing-identity-management#updating_idm_packages)
   * Playbook to update IdM cluster servers
 
-Depending on the environment and requirements, separate vars files,
-group vars, variables defined in an inventory, or some other approach
-might be warranted for providing IPA/IdM configuration. These examples
-aim to provide a known-good starting point for typical installations.
+Depending on the environment and requirements separate playbooks and/or
+vars files, group vars, variables defined in an inventory, or some
+other approach might be appropriate for providing IPA/IdM
+configuration. These examples aim to provide a known-good starting
+point for typical installations.
 
 ## Quick Usage Example
 
@@ -65,7 +66,7 @@ with identity and policy data, and connect clients:
 # Edit inventory and settings to suite local environment
 vi inventory vars_ipa.yml
 # By default no AD trust, use internal CA, no DNS setup
-less vars_ad.yml vars_ca.yml vars_dns.yml
+vi vars_ad.yml vars_ca.yml vars_dns.yml
 # Install IPA/IdM first server
 ansible-playbook -i inventory ipa_server_install.yml
 # Install IPA/IdM replica servers
