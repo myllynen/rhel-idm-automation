@@ -9,7 +9,7 @@ ipaclient_ssh_trust_dns: false
 ipaclient_all_ip_addresses: false
 ipasssd_enable_dns_updates: false
 
-# Uncomment the below variable when setting up DNS server
+# Uncomment the below variables when setting up DNS server
 # Ensure at least one IPA DNS server is allowed to do nsupdates
 
 #ipaserver_auto_reverse: true
