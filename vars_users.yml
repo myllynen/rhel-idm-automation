@@ -39,8 +39,8 @@ ipa_users_create:
 #    noprivate: false
 #    homedir: /home/testuser
 #    shell: /bin/bash
-#    principalexpiration: "2099-12-31 23:59"
-#    passwordexpiration: "2099-12-31 23:59"
+#    principalexpiration: "2089-12-31 23:59"
+#    passwordexpiration: "2089-12-31 23:59"
 
 # List of group members to add
 # Mandatory parameters: name
