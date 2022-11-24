@@ -29,3 +29,11 @@ ipasssd_enable_dns_updates: false
 ##  - 8.8.8.8
 #ipareplica_forward_policy: first
 #ipareplica_no_dnssec_validation: true
+
+# Configure client DNS during enrolling
+# Should use IPA servers if DNS enabled
+#ipaclient_configure_dns_resolver: true
+#ipaclient_dns_servers:
+#  - 192.168.122.101
+#  - 192.168.122.102
+#  - 192.168.122.103
