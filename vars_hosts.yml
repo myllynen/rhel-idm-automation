@@ -20,6 +20,9 @@ ipa_hostgroup_members_remove:
 
 # List of host entries to create
 ipa_hosts_create:
+  - idm1.sub.example.com
+  - idm2.sub.example.com
+  - idm3.sub.example.com
   - idmc.sub.example.com
 
 # List of host groups to create
@@ -30,6 +33,7 @@ ipa_hostgroups_create:
   - name: devhosts
     description: Development team hosts
   - name: tmphosts
+    description: Hosts for testing
 
 # List of host groups members to add
 # Mandatory parameters: name
@@ -38,6 +42,7 @@ ipa_hostgroup_members_add:
     hostgroups:
       - ipaservers
       - devhosts
+      - tmphosts
 
 # List of host groups members to explicitly set
 # Mandatory parameters: name
