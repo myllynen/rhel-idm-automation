@@ -8,11 +8,6 @@
     # Documented RHEL IdM recommendation is "at least 10 minutes"
     pause_between_servers_minutes: 10
   tasks:
-    - name: Install yum-utils package
-      yum:
-        name: yum-utils
-        state: present
-
     - name: Update all packages
       yum:
         name: '*'
@@ -20,18 +15,25 @@
         state: latest
       register: package_install
 
+    - name: Install python3-tracer package
+      yum:
+        name: python3-tracer
+        state: present
+
     - name: Check need for rebooting
-      command: needs-restarting -r
-      register: needs_restarting
+      command: tracer -a
+      register: needs_rebooting
       failed_when: false
       changed_when: false
 
     - name: Reboot system
       reboot:
+      register: system_rebooted
       when: always_reboot | bool or
-            needs_restarting.rc != 0
+            needs_rebooting.rc != 0
 
     - name: Pause before updating next server
       pause:
         minutes: "{{ pause_between_servers_minutes }}"
-      when: package_install is changed
+      when: package_install is changed or
+            system_rebooted is changed
