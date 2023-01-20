@@ -59,9 +59,9 @@ point for typical installations.
 
 ## Quick Usage Example
 
-These playbooks use the Ansible FreeIPA automation available from
-upstream repository (unsupported), _ansible-freeipa_ RPM (suppored), and
-Red Hat Automation Hub, please see the links below.
+These playbooks use the Ansible FreeIPA automation available from the
+upstream repository (unsupported), the _ansible-freeipa_ RPM (suppored),
+and Red Hat Automation Hub, please see the links below.
 
 To install IPA/IdM servers, configure IPA/IdM cluster, populate IPA/IdM
 with identity and policy data, and connect clients:
