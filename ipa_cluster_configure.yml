@@ -69,7 +69,7 @@
         left: "{{ item.left }}"
         right: "{{ item.right }}"
         state: present
-      loop: "{{ ipa_topology_segments_add | default([], true) | select() | list }}"
+      loop: "{{ ipa_topology_segments_add | default([]) | select() | list }}"
 
     - name: Remove topology segment
       ipatopologysegment:
@@ -80,7 +80,7 @@
         left: "{{ item.left }}"
         right: "{{ item.right }}"
         state: absent
-      loop: "{{ ipa_topology_segments_remove | default([], true) | select() | list }}"
+      loop: "{{ ipa_topology_segments_remove | default([]) | select() | list }}"
 
     - name: Verify topology suffix
       ipatopologysuffix:
