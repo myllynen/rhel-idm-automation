@@ -9,6 +9,7 @@
     pause_between_servers_minutes: 10
   tasks:
     - name: Update all packages
+      # noqa: package-latest
       yum:
         name: '*'
         update_cache: true
