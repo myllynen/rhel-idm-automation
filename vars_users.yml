@@ -29,7 +29,7 @@ ipa_groups_create:
 ipa_users_create:
   - name: testuser
 #    # This should come from vault
-    password: foobar12
+    password: foobar123
     first: Test
     last: User
 #    email:
@@ -49,7 +49,7 @@ ipa_group_members_add:
     users:
       - testuser
     #groups:
-    #  - 
+    #  -
 
 # List of group members to explicitly set
 # Mandatory parameters: name

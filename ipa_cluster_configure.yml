@@ -38,6 +38,7 @@
       when: ipa_admin_password_expire | default(false)
 
     - name: Configure servers visible
+      # noqa: no-log-password
       ipaserver:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -53,6 +54,7 @@
       when: ipa_ca_renewal_server | default(false)
 
     - name: Configure servers hidden
+      # noqa: no-log-password
       ipaserver:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -61,6 +63,7 @@
       loop: "{{ ipa_servers_hidden | select() | list }}"
 
     - name: Add topology segment
+      # noqa: no-log-password
       ipatopologysegment:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -72,6 +75,7 @@
       loop: "{{ ipa_topology_segments_add | default([]) | select() | list }}"
 
     - name: Remove topology segment
+      # noqa: no-log-password
       ipatopologysegment:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -83,6 +87,7 @@
       loop: "{{ ipa_topology_segments_remove | default([]) | select() | list }}"
 
     - name: Verify topology suffix
+      # noqa: no-log-password
       ipatopologysuffix:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"

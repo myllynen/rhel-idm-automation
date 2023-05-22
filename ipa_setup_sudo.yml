@@ -7,6 +7,7 @@
     - vault_ipa.yml
   tasks:
     - name: Delete sudo rule
+      # noqa: no-log-password
       ipasudorule:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -15,6 +16,7 @@
       loop: "{{ ipa_sudo_rules_delete | default([]) | select() | list }}"
 
     - name: Delete sudo command group
+      # noqa: no-log-password
       ipasudocmdgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -23,6 +25,7 @@
       loop: "{{ ipa_sudo_command_groups_delete | default([]) | select() | list }}"
 
     - name: Delete sudo command
+      # noqa: no-log-password
       ipasudocmd:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -31,6 +34,7 @@
       loop: "{{ ipa_sudo_commands_delete | default([]) | select() | list }}"
 
     - name: Create sudo command
+      # noqa: no-log-password
       ipasudocmd:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -39,6 +43,7 @@
       loop: "{{ ipa_sudo_commands_create | default([]) | select() | list }}"
 
     - name: Create sudo command group
+      # noqa: no-log-password
       ipasudocmdgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -51,6 +56,7 @@
         label: "{{ item.name }}"
 
     - name: Create sudo rule
+      # noqa: no-log-password
       ipasudorule:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"

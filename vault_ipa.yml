@@ -1,18 +1,18 @@
 # Admin principal and IPA/DS secrets
 ipaadmin_principal: admin
-ipaadmin_password: foobar12
-ipadm_password: foobar12
+ipaadmin_password: foobar123
+ipadm_password: foobar123
 
 # Disabled IPA CA + external CA provided certs secrets - first server
-#ipaserver_dirsrv_pin: foobar12
-#ipaserver_http_pin: foobar12
-#ipaserver_pkinit_pin: foobar12
+#ipaserver_dirsrv_pin: foobar123
+#ipaserver_http_pin: foobar123
+#ipaserver_pkinit_pin: foobar123
 
 # Disabled IPA CA + external CA provided certs secrets - replica servers
-#ipareplica_dirsrv_pin: foobar12
-#ipareplica_http_pin: foobar12
-#ipareplica_pkinit_pin: foobar12
+#ipareplica_dirsrv_pin: foobar123
+#ipareplica_http_pin: foobar123
+#ipareplica_pkinit_pin: foobar123
 
 # AD trust secrets, define either or
-#ad_admin_password: foobar12
-#ad_trust_secret: foobar1234
+#ad_admin_password: foobar123
+#ad_trust_secret: foobar321

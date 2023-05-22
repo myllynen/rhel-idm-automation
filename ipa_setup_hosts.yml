@@ -8,6 +8,7 @@
     - vault_ipa.yml
   tasks:
     - name: Delete host group
+      # noqa: no-log-password
       ipahostgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -16,6 +17,7 @@
       loop: "{{ ipa_hostgroups_delete | default([]) | select() | list }}"
 
     - name: Remove host group members
+      # noqa: no-log-password
       ipahostgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -29,6 +31,7 @@
         label: "{{ item.name }}"
 
     - name: Delete host
+      # noqa: no-log-password
       ipahost:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -38,6 +41,7 @@
       loop: "{{ ipa_hosts_delete | default([]) | select() | list }}"
 
     - name: Disable host
+      # noqa: no-log-password
       ipahost:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -47,6 +51,7 @@
       loop: "{{ ipa_hosts_disable | default([]) | select() | list }}"
 
     - name: Create host group
+      # noqa: no-log-password
       ipahostgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -58,6 +63,7 @@
         label: "{{ item.name }}"
 
     - name: Create host
+      # noqa: no-log-password
       ipahost:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -69,6 +75,7 @@
         label: "{{ item }}"
 
     - name: Add host group members
+      # noqa: no-log-password
       ipahostgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -81,6 +88,7 @@
         label: "{{ item.name }}"
 
     - name: Explicitly set host group members
+      # noqa: no-log-password
       ipahostgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"

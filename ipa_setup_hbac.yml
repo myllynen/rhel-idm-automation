@@ -15,6 +15,7 @@
       when: ipa_hbac_allow_all | default(false)
 
     - name: Delete HBAC rule
+      # noqa: no-log-password
       ipahbacrule:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -23,6 +24,7 @@
       loop: "{{ ipa_hbac_rules_delete | default([]) | select() | list }}"
 
     - name: Delete HBAC service group
+      # noqa: no-log-password
       ipahbacsvcgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -31,6 +33,7 @@
       loop: "{{ ipa_hbac_service_groups_delete | default([]) | select() | list }}"
 
     - name: Delete HBAC service
+      # noqa: no-log-password
       ipahbacsvc:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -39,6 +42,7 @@
       loop: "{{ ipa_hbac_services_delete | default([]) | select() | list }}"
 
     - name: Create HBAC service
+      # noqa: no-log-password
       ipahbacsvc:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -50,6 +54,7 @@
         label: "{{ item.name }}"
 
     - name: Create HBAC service group
+      # noqa: no-log-password
       ipahbacsvcgroup:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -63,6 +68,7 @@
         label: "{{ item.name }}"
 
     - name: Create HBAC rule
+      # noqa: no-log-password
       ipahbacrule:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
