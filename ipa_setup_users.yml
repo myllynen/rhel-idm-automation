@@ -97,20 +97,22 @@
 
     # Loop to display items
     - name: Create users
+      # Only comment out during testing
+      no_log: true
       ipauser:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
         users: "{{ item }}"
         update_password: on_create
         state: present
-      # Only comment out during testing
-      no_log: true
       loop: "{{ [ipa_users_create | default([])] | select() | list }}"
       loop_control:
         label: "{{ item | map(attribute='name') }}"
       when: not operate_one_by_one | bool
 
     - name: Create user
+      # Only comment out during testing
+      no_log: true
       ipauser:
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -128,8 +130,6 @@
         passwordexpiration: "{{ item.passwordexpiration | default(omit) }}"
         update_password: on_create
         state: present
-      # Only comment out during testing
-      no_log: true
       loop: "{{ ipa_users_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
