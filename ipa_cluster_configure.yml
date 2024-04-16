@@ -31,68 +31,68 @@
 
     - name: Configure admin password expiration
       ipauser:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ ipaadmin_principal }}"
         passwordexpiration: "{{ ipa_admin_password_expire }}"
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       when: ipa_admin_password_expire | default(false)
 
     - name: Configure servers visible
       # noqa: no-log-password
       ipaserver:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         hidden: false
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_servers_visible }}"
 
     - name: Configure CA renewal server
       ipaconfig:
+        ca_renewal_master_server: "{{ ipa_ca_renewal_server }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        ca_renewal_master_server: "{{ ipa_ca_renewal_server }}"
       when: ipa_ca_renewal_server | default(false)
 
     - name: Configure servers hidden
       # noqa: no-log-password
       ipaserver:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
         name: "{{ item }}"
         hidden: true
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_servers_hidden | select() | list }}"
 
     - name: Add topology segment
       # noqa: no-log-password
       ipatopologysegment:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
         suffix: "{{ item.suffix }}"
         name: "{{ item.name | default(omit) }}"
         left: "{{ item.left }}"
         right: "{{ item.right }}"
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_topology_segments_add | default([]) | select() | list }}"
 
     - name: Remove topology segment
       # noqa: no-log-password
       ipatopologysegment:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: absent
         suffix: "{{ item.suffix }}"
         name: "{{ item.name | default(omit) }}"
         left: "{{ item.left }}"
         right: "{{ item.right }}"
-        state: absent
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_topology_segments_remove | default([]) | select() | list }}"
 
     - name: Verify topology suffix
       # noqa: no-log-password
       ipatopologysuffix:
+        state: verified
+        suffix: domain
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        suffix: domain
-        state: verified
       changed_when: false
       loop:
         - ca

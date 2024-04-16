@@ -11,15 +11,15 @@
     - name: Update all packages
       # noqa: package-latest
       yum:
+        state: latest
         name: '*'
         update_cache: true
-        state: latest
       register: package_install
 
     - name: Install python3-tracer package
       yum:
-        name: python3-tracer
         state: present
+        name: python3-tracer
 
     - name: Check need for rebooting
       command: tracer -a

@@ -9,48 +9,48 @@
     - name: Delete sudo rule
       # noqa: no-log-password
       ipasudorule:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ ipa_sudo_rules_delete | default([]) | select() | list }}"
 
     - name: Delete sudo command group
       # noqa: no-log-password
       ipasudocmdgroup:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ ipa_sudo_command_groups_delete | default([]) | select() | list }}"
 
     - name: Delete sudo command
       # noqa: no-log-password
       ipasudocmd:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ ipa_sudo_commands_delete | default([]) | select() | list }}"
 
     - name: Create sudo command
       # noqa: no-log-password
       ipasudocmd:
+        state: present
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: present
       loop: "{{ ipa_sudo_commands_create | default([]) | select() | list }}"
 
     - name: Create sudo command group
       # noqa: no-log-password
       ipasudocmdgroup:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
+        action: sudocmdgroup
         name: "{{ item.name }}"
         sudocmd: "{{ item.commands | default(omit) }}"
-        action: sudocmdgroup
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_sudo_command_groups_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
@@ -58,8 +58,8 @@
     - name: Create sudo rule
       # noqa: no-log-password
       ipasudorule:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
+        action: sudorule
         name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
         user: "{{ item.users | default(omit) }}"
@@ -77,8 +77,8 @@
         #runasgroupcategory: "{{ 'all' if 'runasgroups' not in item else omit }}"
         sudooption: "{{ item.sudo_options | default(omit) }}"
         order: "{{ item.order | default(omit) }}"
-        action: sudorule
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_sudo_rules_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"

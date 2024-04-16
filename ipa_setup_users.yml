@@ -15,33 +15,33 @@
     - name: Delete groups
       # noqa: no-log-password
       ipagroup:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ [ipa_groups_delete | default([])] | select() | list }}"
       when: not operate_one_by_one | bool
 
     - name: Delete group
       # noqa: no-log-password
       ipagroup:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ ipa_groups_delete | default([]) | select() | list }}"
       when: operate_one_by_one | bool
 
     - name: Remove group members
       # noqa: no-log-password
       ipagroup:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: absent
+        action: member
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"
-        action: member
-        state: absent
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_group_members_remove | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
@@ -50,20 +50,20 @@
     - name: Delete users
       # noqa: no-log-password
       ipauser:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ [ipa_users_delete | default([])] | select() | list }}"
       when: not operate_one_by_one | bool
 
     - name: Delete user
       # noqa: no-log-password
       ipauser:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ ipa_users_delete | default([]) | select() | list }}"
       when: operate_one_by_one | bool
 
@@ -71,10 +71,10 @@
     - name: Create groups
       # noqa: no-log-password
       ipagroup:
+        state: present
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: present
       loop: "{{ [ipa_groups_create | default([])] | select() | list }}"
       loop_control:
         label: "{{ item | map(attribute='name') }}"
@@ -84,11 +84,11 @@
     - name: Create group
       # noqa: no-log-password
       ipagroup:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
         name: "{{ item.name }}"
         gidnumber: "{{ item.gid | default(omit) }}"
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_groups_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
@@ -100,11 +100,11 @@
       # Only comment out during testing
       no_log: true
       ipauser:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
         users: "{{ item }}"
         update_password: on_create
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ [ipa_users_create | default([])] | select() | list }}"
       loop_control:
         label: "{{ item | map(attribute='name') }}"
@@ -114,8 +114,7 @@
       # Only comment out during testing
       no_log: true
       ipauser:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
         name: "{{ item.name }}"
         password: "{{ item.password | default(omit) }}"
         first: "{{ item.first | default(omit) }}"
@@ -129,7 +128,8 @@
         principalexpiration: "{{ item.principalexpiration | default(omit) }}"
         passwordexpiration: "{{ item.passwordexpiration | default(omit) }}"
         update_password: on_create
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_users_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
@@ -138,13 +138,13 @@
     - name: Add group members
       # noqa: no-log-password
       ipagroup:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
+        action: member
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"
-        action: member
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_group_members_add | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
@@ -152,13 +152,13 @@
     - name: Explicitly set group members
       # noqa: no-log-password
       ipagroup:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
+        action: group
         name: "{{ item.name }}"
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"
-        action: group
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_group_members_set | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
@@ -166,21 +166,21 @@
     - name: Delete user self service rule
       # noqa: no-log-password
       ipaselfservice:
+        state: absent
+        name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-        name: "{{ item }}"
-        state: absent
       loop: "{{ ipa_selfservice_delete | default([]) | select() | list }}"
 
     - name: Create user self service rules
       # noqa: no-log-password
       ipaselfservice:
-        ipaadmin_principal: "{{ ipaadmin_principal }}"
-        ipaadmin_password: "{{ ipaadmin_password }}"
+        state: present
         name: "{{ item.name }}"
         attribute: "{{ item.attributes }}"
         permission: "{{ item.permissions }}"
-        state: present
+        ipaadmin_principal: "{{ ipaadmin_principal }}"
+        ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_selfservice_create | default([]) | select() | list }}"
       loop_control:
         label: "{{ item.name }}"
