@@ -21,7 +21,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hbac_rules_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_hbac_rules_delete | default([]) | select }}"
 
     - name: Delete HBAC service group
       # noqa: no-log-password
@@ -30,7 +30,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hbac_service_groups_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_hbac_service_groups_delete | default([]) | select }}"
 
     - name: Delete HBAC service
       # noqa: no-log-password
@@ -39,7 +39,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hbac_services_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_hbac_services_delete | default([]) | select }}"
 
     - name: Create HBAC service
       # noqa: no-log-password
@@ -49,7 +49,7 @@
         description: "{{ item.description | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hbac_services_create | default([]) | select() | list }}"
+      loop: "{{ ipa_hbac_services_create | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -63,7 +63,7 @@
         hbacsvc: "{{ item.services | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hbac_service_groups_create | default([]) | select() | list }}"
+      loop: "{{ ipa_hbac_service_groups_create | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -85,6 +85,6 @@
         servicecategory: "{{ 'all' if 'services' not in item and 'service_groups' not in item else '' }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hbac_rules_create | default([]) | select() | list }}"
+      loop: "{{ ipa_hbac_rules_create | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"

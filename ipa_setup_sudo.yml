@@ -13,7 +13,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_sudo_rules_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_sudo_rules_delete | default([]) | select }}"
 
     - name: Delete sudo command group
       # noqa: no-log-password
@@ -22,7 +22,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_sudo_command_groups_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_sudo_command_groups_delete | default([]) | select }}"
 
     - name: Delete sudo command
       # noqa: no-log-password
@@ -31,7 +31,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_sudo_commands_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_sudo_commands_delete | default([]) | select }}"
 
     - name: Create sudo command
       # noqa: no-log-password
@@ -40,7 +40,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_sudo_commands_create | default([]) | select() | list }}"
+      loop: "{{ ipa_sudo_commands_create | default([]) | select }}"
 
     - name: Create sudo command group
       # noqa: no-log-password
@@ -51,7 +51,7 @@
         sudocmd: "{{ item.commands | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_sudo_command_groups_create | default([]) | select() | list }}"
+      loop: "{{ ipa_sudo_command_groups_create | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -79,6 +79,6 @@
         order: "{{ item.order | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_sudo_rules_create | default([]) | select() | list }}"
+      loop: "{{ ipa_sudo_rules_create | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"

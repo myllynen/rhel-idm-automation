@@ -14,7 +14,7 @@
         name: "{{ item }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hostgroups_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_hostgroups_delete | default([]) | select }}"
 
     - name: Remove host group members
       # noqa: no-log-password
@@ -26,7 +26,7 @@
         hostgroup: "{{ item.hostgroups | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hostgroup_members_remove | default([]) | select() | list }}"
+      loop: "{{ ipa_hostgroup_members_remove | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -38,7 +38,7 @@
         update_dns: "{{ ipaserver_setup_dns | default(false) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hosts_delete | default([]) | select() | list }}"
+      loop: "{{ ipa_hosts_delete | default([]) | select }}"
 
     - name: Disable host
       # noqa: no-log-password
@@ -48,7 +48,7 @@
         update_dns: "{{ ipaserver_setup_dns | default(false) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hosts_disable | default([]) | select() | list }}"
+      loop: "{{ ipa_hosts_disable | default([]) | select }}"
 
     - name: Create host group
       # noqa: no-log-password
@@ -58,7 +58,7 @@
         description: "{{ item.description | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hostgroups_create | default([]) | select() | list }}"
+      loop: "{{ ipa_hostgroups_create | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -70,7 +70,7 @@
         force: true
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hosts_create | default([]) | select() | list }}"
+      loop: "{{ ipa_hosts_create | default([]) | select }}"
       loop_control:
         label: "{{ item }}"
 
@@ -83,7 +83,7 @@
         hostgroup: "{{ item.hostgroups | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hostgroup_members_add | default([]) | select() | list }}"
+      loop: "{{ ipa_hostgroup_members_add | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"
 
@@ -96,6 +96,6 @@
         hostgroup: "{{ item.hostgroups | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
-      loop: "{{ ipa_hostgroup_members_set | default([]) | select() | list }}"
+      loop: "{{ ipa_hostgroup_members_set | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"

@@ -10,14 +10,14 @@
   tasks:
     - name: Update all packages
       # noqa: package-latest
-      yum:
+      dnf:
         state: latest
         name: '*'
         update_cache: true
       register: package_install
 
     - name: Install python3-tracer package
-      yum:
+      dnf:
         state: present
         name: python3-tracer
 
