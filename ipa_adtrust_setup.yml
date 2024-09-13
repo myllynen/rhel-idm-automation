@@ -28,4 +28,3 @@
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       when: ipatrust_ad_two_way_trust | bool
-
