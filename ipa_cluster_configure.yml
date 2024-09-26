@@ -65,11 +65,11 @@
     - name: Add topology segment
       # noqa: no-log-password
       ipatopologysegment:
-        state: present
-        suffix: "{{ item.suffix }}"
-        name: "{{ item.name | default(omit) }}"
         left: "{{ item.left }}"
         right: "{{ item.right }}"
+        suffix: "{{ item.suffix }}"
+        name: "{{ item.name | default(omit) }}"
+        state: present
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_topology_segments_add | default([]) | select }}"
@@ -77,11 +77,11 @@
     - name: Remove topology segment
       # noqa: no-log-password
       ipatopologysegment:
-        state: absent
-        suffix: "{{ item.suffix }}"
-        name: "{{ item.name | default(omit) }}"
         left: "{{ item.left }}"
         right: "{{ item.right }}"
+        suffix: "{{ item.suffix }}"
+        name: "{{ item.name | default(omit) }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_topology_segments_remove | default([]) | select }}"
@@ -89,8 +89,8 @@
     - name: Verify topology suffix
       # noqa: no-log-password
       ipatopologysuffix:
+        suffix: "{{ item }}"
         state: verified
-        suffix: domain
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       changed_when: false

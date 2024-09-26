@@ -10,8 +10,8 @@
     - name: Delete host group
       # noqa: no-log-password
       ipahostgroup:
-        state: absent
         name: "{{ item }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_hostgroups_delete | default([]) | select }}"
@@ -19,9 +19,9 @@
     - name: Remove host group members
       # noqa: no-log-password
       ipahostgroup:
+        name: "{{ item.name }}"
         state: absent
         action: member
-        name: "{{ item.name }}"
         host: "{{ item.hosts | default(omit) }}"
         hostgroup: "{{ item.hostgroups | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -33,8 +33,8 @@
     - name: Delete host
       # noqa: no-log-password
       ipahost:
-        state: absent
         name: "{{ item }}"
+        state: absent
         update_dns: "{{ ipaserver_setup_dns | default(false) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -43,8 +43,8 @@
     - name: Disable host
       # noqa: no-log-password
       ipahost:
-        state: disabled
         name: "{{ item }}"
+        state: disabled
         update_dns: "{{ ipaserver_setup_dns | default(false) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -53,8 +53,8 @@
     - name: Create host group
       # noqa: no-log-password
       ipahostgroup:
-        state: present
         name: "{{ item.name }}"
+        state: present
         description: "{{ item.description | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -65,8 +65,8 @@
     - name: Create host
       # noqa: no-log-password
       ipahost:
-        state: present
         name: "{{ item }}"
+        state: present
         force: true
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -77,8 +77,8 @@
     - name: Add host group members
       # noqa: no-log-password
       ipahostgroup:
-        action: member
         name: "{{ item.name }}"
+        action: member
         host: "{{ item.hosts | default(omit) }}"
         hostgroup: "{{ item.hostgroups | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -90,8 +90,8 @@
     - name: Explicitly set host group members
       # noqa: no-log-password
       ipahostgroup:
-        action: hostgroup
         name: "{{ item.name }}"
+        action: hostgroup
         host: "{{ item.hosts | default(omit) }}"
         hostgroup: "{{ item.hostgroups | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"

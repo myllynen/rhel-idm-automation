@@ -8,8 +8,8 @@
   tasks:
     - name: Establish one-way AD trust
       ipatrust:
-        state: present
         two_way: false
+        state: present
         realm: "{{ ipatrust_ad_realm }}"
         base_id: "{{ ipatrust_ad_base_id }}"
         admin: "{{ ipatrust_ad_admin_username }}"
@@ -20,8 +20,8 @@
 
     - name: Establish two-way AD trust
       ipatrust:
-        state: present
         two_way: true
+        state: present
         realm: "{{ ipatrust_ad_realm }}"
         base_id: "{{ ipatrust_ad_base_id }}"
         trust_secret: "{{ ipatrust_trust_secret }}"

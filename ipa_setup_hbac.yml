@@ -8,8 +8,8 @@
   tasks:
     - name: Configure default allow_all HBAC rule
       ipahbacrule:
-        state: "{{ ipa_hbac_allow_all }}"
         name: allow_all
+        state: "{{ ipa_hbac_allow_all }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       when: ipa_hbac_allow_all | default(false)
@@ -17,8 +17,8 @@
     - name: Delete HBAC rule
       # noqa: no-log-password
       ipahbacrule:
-        state: absent
         name: "{{ item }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_hbac_rules_delete | default([]) | select }}"
@@ -26,8 +26,8 @@
     - name: Delete HBAC service group
       # noqa: no-log-password
       ipahbacsvcgroup:
-        state: absent
         name: "{{ item }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_hbac_service_groups_delete | default([]) | select }}"
@@ -35,8 +35,8 @@
     - name: Delete HBAC service
       # noqa: no-log-password
       ipahbacsvc:
-        state: absent
         name: "{{ item }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_hbac_services_delete | default([]) | select }}"
@@ -44,8 +44,8 @@
     - name: Create HBAC service
       # noqa: no-log-password
       ipahbacsvc:
-        state: present
         name: "{{ item.name }}"
+        state: present
         description: "{{ item.description | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -56,9 +56,9 @@
     - name: Create HBAC service group
       # noqa: no-log-password
       ipahbacsvcgroup:
+        name: "{{ item.name }}"
         state: present
         action: hbacsvcgroup
-        name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
         hbacsvc: "{{ item.services | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -70,9 +70,9 @@
     - name: Create HBAC rule
       # noqa: no-log-password
       ipahbacrule:
+        name: "{{ item.name }}"
         state: present
         action: hbacrule
-        name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"

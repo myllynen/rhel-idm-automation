@@ -9,8 +9,8 @@
     - name: Delete sudo rule
       # noqa: no-log-password
       ipasudorule:
-        state: absent
         name: "{{ item }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_sudo_rules_delete | default([]) | select }}"
@@ -18,8 +18,8 @@
     - name: Delete sudo command group
       # noqa: no-log-password
       ipasudocmdgroup:
-        state: absent
         name: "{{ item }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_sudo_command_groups_delete | default([]) | select }}"
@@ -27,8 +27,8 @@
     - name: Delete sudo command
       # noqa: no-log-password
       ipasudocmd:
-        state: absent
         name: "{{ item }}"
+        state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_sudo_commands_delete | default([]) | select }}"
@@ -36,8 +36,8 @@
     - name: Create sudo command
       # noqa: no-log-password
       ipasudocmd:
-        state: present
         name: "{{ item }}"
+        state: present
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
       loop: "{{ ipa_sudo_commands_create | default([]) | select }}"
@@ -45,9 +45,9 @@
     - name: Create sudo command group
       # noqa: no-log-password
       ipasudocmdgroup:
+        name: "{{ item.name }}"
         state: present
         action: sudocmdgroup
-        name: "{{ item.name }}"
         sudocmd: "{{ item.commands | default(omit) }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -58,9 +58,9 @@
     - name: Create sudo rule
       # noqa: no-log-password
       ipasudorule:
+        name: "{{ item.name }}"
         state: present
         action: sudorule
-        name: "{{ item.name }}"
         description: "{{ item.description | default(omit) }}"
         user: "{{ item.users | default(omit) }}"
         group: "{{ item.groups | default(omit) }}"

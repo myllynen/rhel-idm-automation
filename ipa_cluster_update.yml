@@ -11,15 +11,15 @@
     - name: Update all packages
       # noqa: package-latest
       dnf:
-        state: latest
         name: '*'
+        state: latest
         update_cache: true
       register: package_install
 
     - name: Install python3-tracer package
       dnf:
-        state: present
         name: python3-tracer
+        state: present
 
     - name: Check need for rebooting
       command: tracer -a
