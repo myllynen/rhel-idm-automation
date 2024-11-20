@@ -5,8 +5,7 @@
   vars_files:
     - vault_ipa.yml
   vars:
-    # https://bugzilla.redhat.com/show_bug.cgi?id=2121099
-    ipa_admin_password_expire: 2089-12-31 23:59:59
+    ipa_admin_password_expire: 2099-12-31 23:59:59
     # TODO: Configure CRL publisher server
     # https://github.com/freeipa/ansible-freeipa/issues/883
     ipa_ca_renewal_server: idm1.sub.example.com
