@@ -61,7 +61,6 @@
       - gawk-all-langpacks
       - gcc*
       - geolite*
-      #- hwdata
       - initscripts-rename-device
       - i*-firmware
       - l*-firmware*
