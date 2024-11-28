@@ -44,14 +44,10 @@
       - nano
       - openssh-clients
       - psmisc
+      - python3-tracer
       - sos
       - tar
       - zstd
-      - podman
-      - python3-cryptography
-      - python3-psycopg2
-      - python3-tracer
-      - rsync
     packages_install_weak_deps: true
     packages_install_display_results: true
     packages_remove:
