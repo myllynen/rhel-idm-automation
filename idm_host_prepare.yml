@@ -108,7 +108,7 @@
   gather_facts: false
   tasks:
     - name: Check umask
-      command: umask
+      ansible.builtin.command: umask
       register: replica_umask
       failed_when: replica_umask.stdout != '0022'
       changed_when: false

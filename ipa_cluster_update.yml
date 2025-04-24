@@ -10,25 +10,25 @@
   tasks:
     - name: Update all packages
       # noqa: package-latest
-      dnf:
+      ansible.builtin.dnf:
         name: '*'
         state: latest
         update_cache: true
       register: package_install
 
     - name: Install python3-tracer package
-      dnf:
+      ansible.builtin.dnf:
         name: python3-tracer
         state: present
 
     - name: Check need for rebooting
-      command: tracer -a
+      ansible.builtin.command: tracer -a
       register: needs_rebooting
       failed_when: false
       changed_when: false
 
     - name: Reboot system
-      reboot:
+      ansible.builtin.reboot:
       register: system_rebooted
       when: always_reboot | bool or
             needs_rebooting.rc != 0

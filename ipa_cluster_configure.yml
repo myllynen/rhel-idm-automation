@@ -22,7 +22,7 @@
       - { suffix: domain+ca, left: idm1.sub.example.com, right: lost.sub.example.com }
   tasks:
     - name: Verify configuration
-      assert:
+      ansible.builtin.assert:
         that:
           - ipa_ca_renewal_server not in ipa_servers_hidden | default([]) | select
         fail_msg: "CA renewal server cannot be hidden"
