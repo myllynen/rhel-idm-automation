@@ -34,7 +34,7 @@
             needs_rebooting.rc != 0
 
     - name: Pause before updating next server
-      pause:
+      ansible.builtin.pause:
         minutes: "{{ pause_between_servers_minutes }}"
       when: package_install is changed or
             system_rebooted is changed
