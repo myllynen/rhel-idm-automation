@@ -48,7 +48,7 @@ Ansible playbooks for RHEL IdM automation.
   * Playbook to create IdM backup
 * [ipa_backup_restore.yml](ipa_backup_restore.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipabackup)
   * Playbook to restore IdM backup
-* [ipa_cluster_update.yml](ipa_cluster_update.yml) | [doc](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/installing_identity_management/update-downgrade-ipa_installing-identity-management#updating_idm_packages)
+* [ipa_cluster_update.yml](ipa_cluster_update.yml) | [doc](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/installing_identity_management/update-downgrade-ipa)
   * Playbook to update IdM cluster servers
 
 Depending on the environment and requirements separate playbooks and/or
