@@ -15,11 +15,11 @@
     ipa_servers_hidden:
       - idm3.sub.example.com
     ipa_topology_segments_add:
-      - { suffix: domain+ca, left: idm1.sub.example.com, right: idm2.sub.example.com }
-      - { suffix: domain+ca, left: idm1.sub.example.com, right: idm3.sub.example.com }
-      - { suffix: domain+ca, left: idm2.sub.example.com, right: idm3.sub.example.com }
+      - {suffix: domain+ca, left: idm1.sub.example.com, right: idm2.sub.example.com}
+      - {suffix: domain+ca, left: idm1.sub.example.com, right: idm3.sub.example.com}
+      - {suffix: domain+ca, left: idm2.sub.example.com, right: idm3.sub.example.com}
     ipa_topology_segments_remove:
-      - { suffix: domain+ca, left: idm1.sub.example.com, right: lost.sub.example.com }
+      - {suffix: domain+ca, left: idm1.sub.example.com, right: lost.sub.example.com}
   tasks:
     - name: Verify configuration
       ansible.builtin.assert:

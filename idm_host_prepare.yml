@@ -44,12 +44,12 @@
       - bash-completion
       - bind-utils
       - curl
+      - dnf-plugins-core
       - firewalld
       - man-pages
       - nano
       - openssh-clients
       - psmisc
-      - python3-tracer
       - rsync
       - sos
       - tar

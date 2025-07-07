@@ -16,13 +16,14 @@
         update_cache: true
       register: package_install
 
-    - name: Install python3-tracer package
+    - name: Install dnf-plugins-core package
       ansible.builtin.dnf:
-        name: python3-tracer
+        name: dnf-plugins-core
         state: present
 
     - name: Check need for rebooting
-      ansible.builtin.command: tracer -a
+      check_mode: false
+      ansible.builtin.command: dnf -C --disableplugin=product-id,subscription-manager needs-restarting
       register: needs_rebooting
       failed_when: false
       changed_when: false
@@ -30,8 +31,8 @@
     - name: Reboot system
       ansible.builtin.reboot:
       register: system_rebooted
-      when: always_reboot | bool or
-            needs_rebooting.rc != 0
+      when: (always_reboot | bool) or
+            (needs_rebooting.stdout_lines is defined and needs_rebooting.stdout_lines | length > 0)
 
     - name: Pause before updating next server
       ansible.builtin.pause:
