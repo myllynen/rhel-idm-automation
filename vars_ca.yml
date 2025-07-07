@@ -10,6 +10,9 @@ ipareplica_setup_ca: true
 ipareplica_setup_kra: true
 ipareplica_no_pkinit: false
 
+# Additional server configuration
+ipaserver_random_serial_numbers: false
+
 # Define only one set of variables below
 # Certificates with IP in SAN require use of integrated DNS
 

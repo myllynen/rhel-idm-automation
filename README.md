@@ -52,10 +52,10 @@ Ansible playbooks for RHEL IdM automation.
   * Playbook to update IdM cluster servers
 
 Depending on the environment and requirements separate playbooks and/or
-vars files, group vars, variables defined in an inventory, or some
-other approach might be appropriate for providing IPA/IdM
-configuration. These examples aim to provide a known-good starting
-point for typical installations.
+vars files, group vars, variables defined in an inventory, or some other
+approach might be appropriate for providing IPA/IdM configuration. These
+examples aim to provide a known-good starting point for typical
+installations.
 
 ## Quick Usage Example
 

@@ -55,6 +55,7 @@
       loop_control:
         label: "{{ item.name }}"
 
+    # Consider using batch mode with sudorules parameter if needed
     - name: Create sudo rule
       # noqa: no-log-password
       ipasudorule:
@@ -67,11 +68,13 @@
         usercategory: "{{ 'all' if 'users' not in item and 'groups' not in item else '' }}"
         host: "{{ item.hosts | default(omit) }}"
         hostgroup: "{{ item.hostgroups | default(omit) }}"
+        hostmask: "{{ item.hostmasks | default(omit) }}"
         hostcategory: "{{ 'all' if 'hosts' not in item and 'hostgroups' not in item else '' }}"
         allow_sudocmd: "{{ item.commands | default(omit) }}"
         allow_sudocmdgroup: "{{ item.command_groups | default(omit) }}"
         cmdcategory: "{{ 'all' if 'commands' not in item and 'command_groups' not in item else '' }}"
         runasuser: "{{ item.runasusers | default(omit) }}"
+        runasuser_group: "{{ item.runasuser_groups | default(omit) }}"
         runasgroup: "{{ item.runagroups | default(omit) }}"
         #runasusercategory: "{{ 'all' if 'runasusers' not in item else omit }}"
         #runasgroupcategory: "{{ 'all' if 'runasgroups' not in item else omit }}"

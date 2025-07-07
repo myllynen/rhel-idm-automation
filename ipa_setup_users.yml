@@ -78,8 +78,7 @@
       loop: "{{ [ipa_groups_create | default([])] | select }}"
       loop_control:
         label: "{{ item | map(attribute='name') }}"
-      # https://github.com/freeipa/ansible-freeipa/issues/879
-      when: false and not operate_one_by_one | bool
+      when: not operate_one_by_one | bool
 
     - name: Create group
       # noqa: no-log-password
@@ -92,8 +91,7 @@
       loop: "{{ ipa_groups_create | default([]) | select }}"
       loop_control:
         label: "{{ item.name }}"
-      # https://github.com/freeipa/ansible-freeipa/issues/879
-      when: true or operate_one_by_one | bool
+      when: operate_one_by_one | bool
 
     # Loop to display items
     - name: Create users
@@ -122,6 +120,7 @@
         email: "{{ item.email | default(omit) }}"
         uid: "{{ item.uid | default(omit) }}"
         gid: "{{ item.gid | default(omit) }}"
+        gecos: "{{ item.gecos | default(omit) }}"
         noprivate: "{{ item.noprivate | default(omit) }}"
         homedir: "{{ item.homedir | default(omit) }}"
         shell: "{{ item.shell | default(omit) }}"

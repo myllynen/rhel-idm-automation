@@ -36,6 +36,7 @@ ipa_users_create:
 #      - testuser@example.com
     uid: 12345
 #    gid: 12345
+#    gecos: Test User
 #    noprivate: false
 #    homedir: /home/testuser
 #    shell: /bin/bash

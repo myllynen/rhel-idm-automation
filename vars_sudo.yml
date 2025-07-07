@@ -44,6 +44,8 @@ ipa_sudo_rules_create:
     #  - somehost
     #hostgroups:
     #  - somegroup
+    #hostmasks:
+    #  - 192.168.122.1/24
     # All commands allowed by default, define
     # commands and/or command groups to restrict!
     #commands:
@@ -53,6 +55,8 @@ ipa_sudo_rules_create:
     # Allowed RunAs users/groups, unset means 'root'
     #runasusers:
     #  - dbuser
+    #runasuser_groups:
+    #  - developers
     #runasgroups:
     #  - dbgroup
     sudo_options:
