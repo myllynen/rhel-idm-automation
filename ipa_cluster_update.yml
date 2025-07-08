@@ -7,7 +7,12 @@
     always_reboot: false
     # Documented RHEL IdM recommendation is "at least 10 minutes"
     pause_between_servers_minutes: 10
+    skip_pause_on_last_server: true
   tasks:
+    - name: Display host to be updated
+      ansible.builtin.debug:
+        var: inventory_hostname
+
     - name: Update all packages
       # noqa: package-latest
       ansible.builtin.dnf:
@@ -23,7 +28,9 @@
 
     - name: Check need for rebooting
       check_mode: false
-      ansible.builtin.command: dnf -C --disableplugin=product-id,subscription-manager needs-restarting
+      ansible.builtin.shell: |
+        dnf -C --disableplugin=product-id,subscription-manager needs-restarting || :
+        dnf -C --disableplugin=product-id,subscription-manager needs-restarting -r > /dev/null 2>&1
       register: needs_rebooting
       failed_when: false
       changed_when: false
@@ -32,10 +39,16 @@
       ansible.builtin.reboot:
       register: system_rebooted
       when: (always_reboot | bool) or
-            (needs_rebooting.stdout_lines is defined and needs_rebooting.stdout_lines | length > 0)
+            ((needs_rebooting.stdout_lines is defined and
+              needs_rebooting.stdout_lines | length > 0) or
+             (needs_rebooting.rc is defined and
+              needs_rebooting.rc != 0))
 
     - name: Pause before updating next server
       ansible.builtin.pause:
         minutes: "{{ pause_between_servers_minutes }}"
-      when: package_install is changed or
-            system_rebooted is changed
+      when:
+        - inventory_hostname != ansible_play_hosts[-1] or
+          not skip_pause_on_last_server | bool
+        - package_install is changed or
+          system_rebooted is changed
