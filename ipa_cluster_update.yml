@@ -6,6 +6,7 @@
   serial: 1
   vars:
     always_reboot: false
+    pause_after_any_updates: true
     # Documented RHEL IdM recommendation is "at least 10 minutes"
     pause_between_servers_minutes: 10
     skip_pause_on_last_server: true
@@ -51,5 +52,5 @@
       when:
         - inventory_hostname != ansible_play_hosts[-1] or
           not skip_pause_on_last_server | bool
-        - package_install is changed or
-          system_rebooted is changed
+        - system_rebooted is changed or
+          (pause_after_any_updates | bool and package_install is changed)
