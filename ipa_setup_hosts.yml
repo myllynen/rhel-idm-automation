@@ -2,6 +2,7 @@
 - name: Setup IPA/IdM hosts and hostgroups
   hosts: ipaserver
   become: true
+  gather_facts: false
   vars_files:
     - vars_dns.yml
     - vars_hosts.yml

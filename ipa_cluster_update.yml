@@ -2,6 +2,7 @@
 - name: Update IPA/IdM cluster
   hosts: ipaserver,ipareplicas
   become: true
+  gather_facts: false
   serial: 1
   vars:
     always_reboot: false

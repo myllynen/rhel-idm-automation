@@ -2,6 +2,7 @@
 - name: Restore IPA/IdM server backup
   hosts: ipabackup
   become: true
+  gather_facts: false
   vars_files:
     - vault_ipa.yml
   vars:

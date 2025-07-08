@@ -2,6 +2,7 @@
 - name: Install IPA/IdM server
   hosts: ipaserver
   become: true
+  gather_facts: false
   vars_files:
     - vars_ad.yml
     - vars_ca.yml

@@ -2,6 +2,7 @@
 - name: Setup IPA/IdM sudo rules
   hosts: ipaserver
   become: true
+  gather_facts: false
   vars_files:
     - vars_sudo.yml
     - vault_ipa.yml
