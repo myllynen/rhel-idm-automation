@@ -2,11 +2,11 @@
 - name: Install IPA/IdM client
   hosts: ipaclients
   become: true
-  gather_facts: false
+  gather_facts: true
   vars_files:
     - vars_dns.yml
     - vars_ipa.yml
     - vault_ipa.yml
   roles:
-    - role: ipaclient
+    - role: redhat.rhel_idm.ipaclient
       state: present

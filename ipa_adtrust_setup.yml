@@ -8,7 +8,7 @@
     - vault_ipa.yml
   tasks:
     - name: Establish one-way AD trust
-      ipatrust:
+      redhat.rhel_idm.ipatrust:
         two_way: false
         state: present
         realm: "{{ ipatrust_ad_realm }}"
@@ -20,7 +20,7 @@
       when: not ipatrust_ad_two_way_trust | bool
 
     - name: Establish two-way AD trust
-      ipatrust:
+      redhat.rhel_idm.ipatrust:
         two_way: true
         state: present
         realm: "{{ ipatrust_ad_realm }}"

@@ -2,7 +2,7 @@
 - name: Create IPA/IdM server backup
   hosts: ipabackup
   become: true
-  gather_facts: false
+  gather_facts: true
   vars_files:
     - vault_ipa.yml
   vars:
@@ -10,7 +10,7 @@
     ipabackup_online: false
     ipabackup_to_controller: true
     ipabackup_keep_on_server: false
-    #ipabackup_controller_path: /var/backup
+    ipabackup_controller_path: /tmp/backup
   roles:
-    - role: ipabackup
+    - role: redhat.rhel_idm.ipabackup
       state: present

@@ -2,17 +2,18 @@
 - name: Restore IPA/IdM server backup
   hosts: ipabackup
   become: true
-  gather_facts: false
+  gather_facts: true
   vars_files:
+    - vars_ipa.yml
     - vault_ipa.yml
   vars:
     ipabackup_from_controller: true
-    ipabackup_controller_path: /var/backup
+    ipabackup_controller_path: /tmp/backup
     ipabackup_name: "{{ ipaserver_backup_name }}"
     ipabackup_password: "{{ ipadm_password }}"
 
     ipabackup_setup_firewalld: "{{ ipacluster_setup_firewalld }}"
     ipabackup_firewalld_zone: "{{ ipacluster_firewalld_zone }}"
   roles:
-    - role: ipabackup
+    - role: redhat.rhel_idm.ipabackup
       state: restored

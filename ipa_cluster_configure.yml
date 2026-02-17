@@ -30,7 +30,7 @@
         success_msg: "Configuration verified"
 
     - name: Configure admin password expiration
-      ipauser:
+      redhat.rhel_idm.ipauser:
         name: "{{ ipaadmin_principal }}"
         passwordexpiration: "{{ ipa_admin_password_expire }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -39,7 +39,7 @@
 
     - name: Configure servers visible
       # noqa: no-log-password
-      ipaserver:
+      redhat.rhel_idm.ipaserver:
         name: "{{ item }}"
         hidden: false
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -47,7 +47,7 @@
       loop: "{{ ipa_servers_visible }}"
 
     - name: Configure CA renewal server
-      ipaconfig:
+      redhat.rhel_idm.ipaconfig:
         ca_renewal_master_server: "{{ ipa_ca_renewal_server }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -55,7 +55,7 @@
 
     - name: Configure servers hidden
       # noqa: no-log-password
-      ipaserver:
+      redhat.rhel_idm.ipaserver:
         name: "{{ item }}"
         hidden: true
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -64,7 +64,7 @@
 
     - name: Add topology segment
       # noqa: no-log-password
-      ipatopologysegment:
+      redhat.rhel_idm.ipatopologysegment:
         left: "{{ item.left }}"
         right: "{{ item.right }}"
         suffix: "{{ item.suffix }}"
@@ -76,7 +76,7 @@
 
     - name: Remove topology segment
       # noqa: no-log-password
-      ipatopologysegment:
+      redhat.rhel_idm.ipatopologysegment:
         left: "{{ item.left }}"
         right: "{{ item.right }}"
         suffix: "{{ item.suffix }}"
@@ -88,7 +88,7 @@
 
     - name: Verify topology suffix
       # noqa: no-log-password
-      ipatopologysuffix:
+      redhat.rhel_idm.ipatopologysuffix:
         suffix: "{{ item }}"
         state: verified
         ipaadmin_principal: "{{ ipaadmin_principal }}"

@@ -15,7 +15,7 @@
     # Loop to display items
     - name: Delete groups
       # noqa: no-log-password
-      ipagroup:
+      redhat.rhel_idm.ipagroup:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -25,7 +25,7 @@
 
     - name: Delete group
       # noqa: no-log-password
-      ipagroup:
+      redhat.rhel_idm.ipagroup:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -35,7 +35,7 @@
 
     - name: Remove group members
       # noqa: no-log-password
-      ipagroup:
+      redhat.rhel_idm.ipagroup:
         name: "{{ item.name }}"
         state: absent
         action: member
@@ -50,7 +50,7 @@
     # Loop to display items
     - name: Delete users
       # noqa: no-log-password
-      ipauser:
+      redhat.rhel_idm.ipauser:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -60,7 +60,7 @@
 
     - name: Delete user
       # noqa: no-log-password
-      ipauser:
+      redhat.rhel_idm.ipauser:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -71,8 +71,8 @@
     # Loop to display items
     - name: Create groups
       # noqa: no-log-password
-      ipagroup:
-        name: "{{ item }}"
+      redhat.rhel_idm.ipagroup:
+        groups: "{{ item }}"
         state: present
         ipaadmin_principal: "{{ ipaadmin_principal }}"
         ipaadmin_password: "{{ ipaadmin_password }}"
@@ -83,7 +83,7 @@
 
     - name: Create group
       # noqa: no-log-password
-      ipagroup:
+      redhat.rhel_idm.ipagroup:
         name: "{{ item.name }}"
         state: present
         gidnumber: "{{ item.gid | default(omit) }}"
@@ -98,7 +98,7 @@
     - name: Create users
       # Only comment out during testing
       no_log: true
-      ipauser:
+      redhat.rhel_idm.ipauser:
         users: "{{ item }}"
         state: present
         update_password: on_create
@@ -112,7 +112,7 @@
     - name: Create user
       # Only comment out during testing
       no_log: true
-      ipauser:
+      redhat.rhel_idm.ipauser:
         name: "{{ item.name }}"
         state: present
         password: "{{ item.password | default(omit) }}"
@@ -137,7 +137,7 @@
 
     - name: Add group members
       # noqa: no-log-password
-      ipagroup:
+      redhat.rhel_idm.ipagroup:
         name: "{{ item.name }}"
         state: present
         action: member
@@ -151,7 +151,7 @@
 
     - name: Explicitly set group members
       # noqa: no-log-password
-      ipagroup:
+      redhat.rhel_idm.ipagroup:
         name: "{{ item.name }}"
         state: present
         action: group
@@ -165,7 +165,7 @@
 
     - name: Delete user self service rule
       # noqa: no-log-password
-      ipaselfservice:
+      redhat.rhel_idm.ipaselfservice:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -174,7 +174,7 @@
 
     - name: Create user self service rules
       # noqa: no-log-password
-      ipaselfservice:
+      redhat.rhel_idm.ipaselfservice:
         name: "{{ item.name }}"
         state: present
         attribute: "{{ item.attributes }}"

@@ -9,7 +9,7 @@
   tasks:
     - name: Delete sudo rule
       # noqa: no-log-password
-      ipasudorule:
+      redhat.rhel_idm.ipasudorule:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -18,7 +18,7 @@
 
     - name: Delete sudo command group
       # noqa: no-log-password
-      ipasudocmdgroup:
+      redhat.rhel_idm.ipasudocmdgroup:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -27,7 +27,7 @@
 
     - name: Delete sudo command
       # noqa: no-log-password
-      ipasudocmd:
+      redhat.rhel_idm.ipasudocmd:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -36,7 +36,7 @@
 
     - name: Create sudo command
       # noqa: no-log-password
-      ipasudocmd:
+      redhat.rhel_idm.ipasudocmd:
         name: "{{ item }}"
         state: present
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -45,7 +45,7 @@
 
     - name: Create sudo command group
       # noqa: no-log-password
-      ipasudocmdgroup:
+      redhat.rhel_idm.ipasudocmdgroup:
         name: "{{ item.name }}"
         state: present
         action: sudocmdgroup
@@ -59,7 +59,7 @@
     # Consider using batch mode with sudorules parameter if needed
     - name: Create sudo rule
       # noqa: no-log-password
-      ipasudorule:
+      redhat.rhel_idm.ipasudorule:
         name: "{{ item.name }}"
         state: present
         action: sudorule

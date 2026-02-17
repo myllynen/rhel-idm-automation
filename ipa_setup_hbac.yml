@@ -8,7 +8,7 @@
     - vault_ipa.yml
   tasks:
     - name: Configure default allow_all HBAC rule
-      ipahbacrule:
+      redhat.rhel_idm.ipahbacrule:
         name: allow_all
         state: "{{ ipa_hbac_allow_all }}"
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -17,7 +17,7 @@
 
     - name: Delete HBAC rule
       # noqa: no-log-password
-      ipahbacrule:
+      redhat.rhel_idm.ipahbacrule:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -26,7 +26,7 @@
 
     - name: Delete HBAC service group
       # noqa: no-log-password
-      ipahbacsvcgroup:
+      redhat.rhel_idm.ipahbacsvcgroup:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -35,7 +35,7 @@
 
     - name: Delete HBAC service
       # noqa: no-log-password
-      ipahbacsvc:
+      redhat.rhel_idm.ipahbacsvc:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -44,7 +44,7 @@
 
     - name: Create HBAC service
       # noqa: no-log-password
-      ipahbacsvc:
+      redhat.rhel_idm.ipahbacsvc:
         name: "{{ item.name }}"
         state: present
         description: "{{ item.description | default(omit) }}"
@@ -56,7 +56,7 @@
 
     - name: Create HBAC service group
       # noqa: no-log-password
-      ipahbacsvcgroup:
+      redhat.rhel_idm.ipahbacsvcgroup:
         name: "{{ item.name }}"
         state: present
         action: hbacsvcgroup
@@ -70,7 +70,7 @@
 
     - name: Create HBAC rule
       # noqa: no-log-password
-      ipahbacrule:
+      redhat.rhel_idm.ipahbacrule:
         name: "{{ item.name }}"
         state: present
         action: hbacrule

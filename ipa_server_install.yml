@@ -2,7 +2,7 @@
 - name: Install IPA/IdM server
   hosts: ipaserver
   become: true
-  gather_facts: false
+  gather_facts: true
   vars_files:
     - vars_ad.yml
     - vars_ca.yml
@@ -10,5 +10,5 @@
     - vars_ipa.yml
     - vault_ipa.yml
   roles:
-    - role: ipaserver
+    - role: redhat.rhel_idm.ipaserver
       state: present

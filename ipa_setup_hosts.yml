@@ -10,7 +10,7 @@
   tasks:
     - name: Delete host group
       # noqa: no-log-password
-      ipahostgroup:
+      redhat.rhel_idm.ipahostgroup:
         name: "{{ item }}"
         state: absent
         ipaadmin_principal: "{{ ipaadmin_principal }}"
@@ -19,7 +19,7 @@
 
     - name: Remove host group members
       # noqa: no-log-password
-      ipahostgroup:
+      redhat.rhel_idm.ipahostgroup:
         name: "{{ item.name }}"
         state: absent
         action: member
@@ -33,7 +33,7 @@
 
     - name: Delete host
       # noqa: no-log-password
-      ipahost:
+      redhat.rhel_idm.ipahost:
         name: "{{ item }}"
         state: absent
         update_dns: "{{ ipaserver_setup_dns | default(false) }}"
@@ -43,7 +43,7 @@
 
     - name: Disable host
       # noqa: no-log-password
-      ipahost:
+      redhat.rhel_idm.ipahost:
         name: "{{ item }}"
         state: disabled
         update_dns: "{{ ipaserver_setup_dns | default(false) }}"
@@ -53,7 +53,7 @@
 
     - name: Create host group
       # noqa: no-log-password
-      ipahostgroup:
+      redhat.rhel_idm.ipahostgroup:
         name: "{{ item.name }}"
         state: present
         description: "{{ item.description | default(omit) }}"
@@ -65,7 +65,7 @@
 
     - name: Create host
       # noqa: no-log-password
-      ipahost:
+      redhat.rhel_idm.ipahost:
         name: "{{ item }}"
         state: present
         force: true
@@ -77,7 +77,7 @@
 
     - name: Add host group members
       # noqa: no-log-password
-      ipahostgroup:
+      redhat.rhel_idm.ipahostgroup:
         name: "{{ item.name }}"
         action: member
         host: "{{ item.hosts | default(omit) }}"
@@ -90,7 +90,7 @@
 
     - name: Explicitly set host group members
       # noqa: no-log-password
-      ipahostgroup:
+      redhat.rhel_idm.ipahostgroup:
         name: "{{ item.name }}"
         action: hostgroup
         host: "{{ item.hosts | default(omit) }}"
