@@ -15,6 +15,8 @@ Ansible playbooks for RHEL IdM automation.
   * Vars files for installing IdM servers
 * [vault_ipa.yml](vault_ipa.yml) | [doc](https://github.com/freeipa/ansible-freeipa#ansible-inventory-file)
   * Unencrypted example vault file
+* [idm_host_prepare.yml](idm_host_prepare.yml) | [doc](https://github.com/myllynen/rhel-ansible-roles)
+  * Playbook to prepare IdM hosts
 * [ipa_server_install.yml](ipa_server_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipaserver)
   * Playbook to install IdM first server
 * [ipa_replica_install.yml](ipa_replica_install.yml) | [doc](https://github.com/freeipa/ansible-freeipa/tree/master/roles/ipareplica)
@@ -69,9 +71,12 @@ with identity and policy data, and connect clients:
 
 ```
 # Edit inventory and settings to suite local environment
-vi inventory vars_ipa.yml
+vi inventory vars_ipa.yml vault_ipa.yml
 # By default no AD trust, use internal CA, no DNS setup
 vi vars_ad.yml vars_ca.yml vars_dns.yml
+# Prepare IPA/IdM hosts,
+# make sure to review SSH/user config before applying
+ansible-playbook -i inventory idm_host_prepare.yml
 # Install IPA/IdM first server
 ansible-playbook -i inventory ipa_server_install.yml
 # Install IPA/IdM replica servers
