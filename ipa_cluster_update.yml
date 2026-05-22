@@ -4,6 +4,7 @@
   become: true
   gather_facts: false
   serial: 1
+  any_errors_fatal: true
   vars:
     always_reboot: false
     pause_after_any_updates: true
