@@ -63,6 +63,7 @@
       - puppet-agent
       - rhn*
       - telnet-server
+      - bluez
       - flashrom
       #- '*fonts*'
       - gawk-all-langpacks
