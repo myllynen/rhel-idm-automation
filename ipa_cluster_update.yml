@@ -12,10 +12,6 @@
     pause_between_servers_minutes: 10
     skip_pause_on_last_server: true
   tasks:
-    - name: Display host to be updated
-      ansible.builtin.debug:
-        var: inventory_hostname
-
     - name: Update all packages
       # noqa: package-latest
       ansible.builtin.dnf:
@@ -40,7 +36,7 @@
 
     - name: Reboot system
       ansible.builtin.reboot:
-      register: system_rebooted
+      register: system_reboot
       when: (always_reboot | bool) or
             ((needs_rebooting.stdout_lines is defined and
               needs_rebooting.stdout_lines | length > 0) or
@@ -53,5 +49,5 @@
       when:
         - inventory_hostname != ansible_play_hosts[-1] or
           not skip_pause_on_last_server | bool
-        - system_rebooted is changed or
+        - system_reboot is changed or
           (pause_after_any_updates | bool and package_install is changed)
