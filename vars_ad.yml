@@ -21,4 +21,4 @@ ipatrust_ad_admin_username: Administrator
 ipatrust_ad_admin_password: "{{ ad_admin_password }}"
 
 # ipatrust_ad_trust_secret for two-way trust
-#ipatrust_ad_trust_secret: "{{ ad_trust_secret }}"
+# ipatrust_ad_trust_secret: "{{ ad_trust_secret }}"

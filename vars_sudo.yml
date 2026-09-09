@@ -34,30 +34,30 @@ ipa_sudo_rules_create:
     description: Test rule
     # Allowed for all users by default,
     # define users/groups to limit access!
-    #users:
-    #  - adminuser
+    # users:
+    #   - adminuser
     groups:
       - admingroup
     # Available on all hosts by default,
     # define hosts/groups to limit access!
-    #hosts:
-    #  - somehost
-    #hostgroups:
-    #  - somegroup
-    #hostmasks:
-    #  - 192.168.122.1/24
+    # hosts:
+    #   - somehost
+    # hostgroups:
+    #   - somegroup
+    # hostmasks:
+    #   - 192.168.122.1/24
     # All commands allowed by default, define
     # commands and/or command groups to restrict!
-    #commands:
-    #  - /usr/sbin/reboot
+    # commands:
+    #   - /usr/sbin/reboot
     command_groups:
       - Full admin
     # Allowed RunAs users/groups, unset means 'root'
-    #runasusers:
-    #  - dbuser
-    #runasuser_groups:
-    #  - developers
-    #runasgroups:
-    #  - dbgroup
+    # runasusers:
+    #   - dbuser
+    # runasuser_groups:
+    #   - developers
+    # runasgroups:
+    #   - dbgroup
     sudo_options:
       - '!authenticate'

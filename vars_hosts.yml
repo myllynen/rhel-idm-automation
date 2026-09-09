@@ -13,9 +13,9 @@ ipa_hosts_disable:
 # List of host group members to remove
 # Mandatory parameters: name
 ipa_hostgroup_members_remove:
-  #- name: allhosts
-  #  hostgroups:
-  #    - dupegroup
+  # - name: allhosts
+  #   hostgroups:
+  #     - dupegroup
 
 
 # List of host entries to create
@@ -50,5 +50,5 @@ ipa_hostgroup_members_set:
   - name: devhosts
     hosts:
       - idmc.sub.example.com
-    #hostgroups:
-    #  -
+    # hostgroups:
+    #   -

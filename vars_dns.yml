@@ -12,28 +12,28 @@ ipasssd_enable_dns_updates: false
 # Uncomment the below variables when setting up DNS server
 # Ensure at least one IPA DNS server is allowed to do nsupdates
 
-#ipaserver_auto_reverse: true
-#ipaserver_no_forwarders: false
-#ipaserver_auto_forwarders: true
-##ipaserver_forwarders:
-##  - 1.1.1.1
-##  - 8.8.8.8
-#ipaserver_forward_policy: first
-#ipaserver_no_dnssec_validation: true
+# ipaserver_auto_reverse: true
+# ipaserver_no_forwarders: false
+# ipaserver_auto_forwarders: true
+## ipaserver_forwarders:
+##   - 1.1.1.1
+##   - 8.8.8.8
+# ipaserver_forward_policy: first
+# ipaserver_no_dnssec_validation: true
 
-#ipareplica_auto_reverse: true
-#ipareplica_no_forwarders: false
-#ipareplica_auto_forwarders: true
-##ipareplica_forwarders:
-##  - 1.1.1.1
-##  - 8.8.8.8
-#ipareplica_forward_policy: first
-#ipareplica_no_dnssec_validation: true
+# ipareplica_auto_reverse: true
+# ipareplica_no_forwarders: false
+# ipareplica_auto_forwarders: true
+## ipareplica_forwarders:
+##   - 1.1.1.1
+##   - 8.8.8.8
+# ipareplica_forward_policy: first
+# ipareplica_no_dnssec_validation: true
 
 # Configure client DNS during enrolling
 # Should use IPA servers if DNS enabled
-#ipaclient_configure_dns_resolver: true
-#ipaclient_dns_servers:
-#  - 192.168.122.101
-#  - 192.168.122.102
-#  - 192.168.122.103
+# ipaclient_configure_dns_resolver: true
+# ipaclient_dns_servers:
+#   - 192.168.122.101
+#   - 192.168.122.102
+#   - 192.168.122.103

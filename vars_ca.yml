@@ -20,51 +20,51 @@ ipaserver_random_serial_numbers: false
 # Internal CA
 #
 ipaserver_external_ca: false
-#ipaserver_subject_base:
-#ipaserver_ca_subject:
+# ipaserver_subject_base:
+# ipaserver_ca_subject:
 ipaserver_ca_signing_algorithm: SHA512withRSA
 
 #
 # External CA + IPA CA installation step 1 variables
 #
-#ipaserver_external_ca: true
-#ipaserver_external_ca_type: generic
-#ipaserver_copy_csr_to_controller: true
+# ipaserver_external_ca: true
+# ipaserver_external_ca_type: generic
+# ipaserver_copy_csr_to_controller: true
 
 #
 # External CA + IPA CA installation step 2 variables
 #
-#ipaserver_external_cert_files_from_controller:
-#  - /root/ca-chain.pem
-##ipaserver_subject_base:
-##ipaserver_ca_subject:
-#ipaserver_ca_signing_algorithm: SHA512withRSA
+# ipaserver_external_cert_files_from_controller:
+#   - /root/ca-chain.pem
+## ipaserver_subject_base:
+## ipaserver_ca_subject:
+# ipaserver_ca_signing_algorithm: SHA512withRSA
 
 #
 # Disabled IPA CA + external CA provided certs variables
 #
-#ipaserver_dirsrv_cert_files:
-#  - /root/certs/server-ds-chain.pem
-#  - /root/certs/server-ds-priv.key
-##ipaserver_dirsrv_cert_name:
-#ipaserver_http_cert_files:
-#  - /root/certs/server-http-chain.pem
-#  - /root/certs/server-http-priv.key
-##ipaserver_http_cert_name:
-#ipaserver_pkinit_cert_files:
-#  - /root/certs/server-pkinit-chain.pem
-#  - /root/certs/server-pkinit-priv.key
-##ipaserver_pkinit_cert_name:
+# ipaserver_dirsrv_cert_files:
+#   - /root/certs/server-ds-chain.pem
+#   - /root/certs/server-ds-priv.key
+## ipaserver_dirsrv_cert_name:
+# ipaserver_http_cert_files:
+#   - /root/certs/server-http-chain.pem
+#   - /root/certs/server-http-priv.key
+## ipaserver_http_cert_name:
+# ipaserver_pkinit_cert_files:
+#   - /root/certs/server-pkinit-chain.pem
+#   - /root/certs/server-pkinit-priv.key
+## ipaserver_pkinit_cert_name:
 
-#ipareplica_dirsrv_cert_files:
-#  - /root/certs/replicaN-ds-chain.pem
-#  - /root/certs/replicaN-ds-priv.key
-##ipareplica_dirsrv_cert_name:
-#ipareplica_http_cert_files:
-#  - /root/certs/replicaN-http-chain.pem
-#  - /root/certs/replicaN-http-priv.key
-##ipareplica_http_cert_name:
-#ipareplica_pkinit_cert_files:
-#  - /root/certs/replicaN-pkinit-chain.pem
-#  - /root/certs/replicaN-pkinit-priv.key
-##ipareplica_pkinit_cert_name:
+# ipareplica_dirsrv_cert_files:
+#   - /root/certs/replicaN-ds-chain.pem
+#   - /root/certs/replicaN-ds-priv.key
+## ipareplica_dirsrv_cert_name:
+# ipareplica_http_cert_files:
+#   - /root/certs/replicaN-http-chain.pem
+#   - /root/certs/replicaN-http-priv.key
+## ipareplica_http_cert_name:
+# ipareplica_pkinit_cert_files:
+#   - /root/certs/replicaN-pkinit-chain.pem
+#   - /root/certs/replicaN-pkinit-priv.key
+## ipareplica_pkinit_cert_name:

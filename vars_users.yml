@@ -49,8 +49,8 @@ ipa_group_members_add:
   - name: testgroup
     users:
       - testuser
-    #groups:
-    #  -
+    # groups:
+    #   -
 
 # List of group members to explicitly set
 # Mandatory parameters: name
